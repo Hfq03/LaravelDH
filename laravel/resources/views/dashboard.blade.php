@@ -1,4 +1,9 @@
 <x-app-layout>
+    @section('content')
+    <h2>{{ __('Resources') }}</h2>
+    <a href="{{ url('/files') }}">{{ __('Files') }}</a>
+    @endsection
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
