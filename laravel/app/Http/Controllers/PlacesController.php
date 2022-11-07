@@ -188,13 +188,16 @@ class PlacesController extends Controller
             $file->filesize=$fileSize;
             $file->save();
             \Log::debug("DB storage OK");
-            $post->body=$request->input('body');
-            $post->latitude=$request->input('latitude');
-            $post->longitude=$request->input('longitude');
-            $post->visibility_id=$request->input('visibility_id');
-            $post->save();
+            $place->name=$request->input('name');
+            $place->description=$request->input('description');
+            $place->latitude=$request->input('latitude');
+            $place->longitude=$request->input('longitude');
+            $place->category_id=$request->input('category_id');
+            $place->visibility_id=$request->input('visibility_id');
 
-            return redirect()->route('places.show', $post)
+            $place->save();
+
+            return redirect()->route('places.show', $place)
                 ->with('success', 'Place Successfully Saved');
 
         } else {

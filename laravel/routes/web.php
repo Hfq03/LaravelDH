@@ -38,6 +38,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('files', FileController::class)->middleware(['auth', 'role:2']);
+Route::resource('files', FileController::class)->middleware(['auth']);
 
 Route::resource('places', PlacesController::class);
