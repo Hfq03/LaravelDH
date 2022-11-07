@@ -38,21 +38,22 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="form-group">
+                            <label for="body">Body</label><br>
+                            <input type="text" id="body" name="body"><br>
+                            <label for="latitude">Latitude</label><br>
+                            <input type="text" id="latitude" name="latitude"><br>
+                            <label for="longitude">Longitude</label><br>
+                            <input type="text" id="longitude" name="longitude"><br>
+                            <label for="visibility_id">Visibility</label><br>
+                            <input type="text" id="visibility_id" name="visibility_id"><br>
+                            <label for="upload">Update:</label>
+                            <input type="file" class="form-control" name="upload"/>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div> 
                     </form>
-                    <div class="form-group">
-                        <label for="body">Body</label><br>
-                        <input type="text" id="body" name="body"><br>
-                        <label for="latitude">Latitude</label><br>
-                        <input type="text" id="latitude" name="latitude"><br>
-                        <label for="longitude">Longitude</label><br>
-                        <input type="text" id="longitude" name="longitude"><br>
-                        <label for="visibility_id">Visibility</label><br>
-                        <input type="text" id="visibility_id" name="visibility_id"><br>
-                        <label for="upload">Update:</label>
-                        <input type="file" class="form-control" name="upload"/>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>  
+                     
                 </div>
            </div>
        </div>
