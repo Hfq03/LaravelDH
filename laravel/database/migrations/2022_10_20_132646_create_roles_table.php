@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->autoincrement();
-            $table->primary('id');
+            $table->id();
             $table->string('name')->unique();
         });
         Schema::table('users', function (Blueprint $table){
@@ -24,7 +23,7 @@ return new class extends Migration
         });
         Artisan::call('db:seed', [
             '--class' => 'RoleSeeder',
-            '--force' => true
+            '--force' => true,
         ]);
     }
 

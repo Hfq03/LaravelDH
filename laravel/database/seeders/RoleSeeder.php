@@ -15,17 +15,11 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'id' => "1",
-            'name' => "editor",
-        ]);
-        DB::table('role')->insert([
-            'id' => "2",
-            'name' => "editor",
-        ]);
-        DB::table('roles')->insert([
-            'id' => "3",
-            'name' => "admin",
-        ]);
+        $roles=[
+            ['id'=> '1', 'name' => 'author'],
+            ['id'=> '2', 'name' => 'editor'],
+            ['id'=> '3', 'name' => 'admin'],
+        ];
+        DB::table('roles')->insert($roles);
     }
 }
