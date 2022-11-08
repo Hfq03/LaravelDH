@@ -15,18 +15,22 @@
                             <tr>
                                 <td scope="col">ID</td>
                                 <td scope="col">Filepath</td>
-                                <td scope="col">Filesize</td>
+                                <td scope="col">Name</td>
+                                <td scope="col">Description</td>
+                                <td scope="col">Author</td>
                                 <td scope="col">Created</td>
                                 <td scope="col">Updated</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $file->id }}</td>
+                                <td>{{ $place->id }}</td>
                                 <td><img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td>
-                                <td>{{ $file->filesize }}</td>
-                                <td>{{ $file->created_at }}</td>
-                                <td>{{ $file->updated_at }}</td>
+                                <td>{{ $place->name }}</td>
+                                <td>{{ $place->description }}</td>
+                                <td>{{ $author->name }}</td>
+                                <td>{{ $place->created_at }}</td>
+                                <td>{{ $place->updated_at }}</td>
                             </tr>
                         </tbody>
                     </table>

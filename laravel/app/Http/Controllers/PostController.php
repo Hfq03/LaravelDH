@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         return view("post.index", [
-            "post" => Post::all()
+            "post" => Post::all(),
         ]);
     }
 
@@ -111,7 +111,8 @@ public function store(Request $request)
     public function show(Post $post)
     {
         return view("post.show", [
-            "post" => $post
+            "post" => $post,
+            "author" => $post->user,
         ]);
     }
 

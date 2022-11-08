@@ -118,6 +118,7 @@ class PlacesController extends Controller
         return view("places.show", [
             'place' => $place,
             'file' => $file,
+            'author' => $place->user,
         ]);
     }
 
@@ -133,6 +134,7 @@ class PlacesController extends Controller
         return view("places.edit", [
             'place' => $place,
             'file' => $file,
+            'autor' => $place->user,
         ]);
     }
 
