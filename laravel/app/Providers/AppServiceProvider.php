@@ -31,6 +31,12 @@ class AppServiceProvider extends ServiceProvider
             // your controller
             \App\Http\Controllers\Admin\UserCrudController::class
         );
+
+        // pass data to view in all requests
+        view()->composer('partials.language-switcher', function ($view) {
+            $view->with('currentLocale', app()->getLocale());
+            $view->with('availableLocales', config('app.available_locales'));
+        });
     }
 
 }

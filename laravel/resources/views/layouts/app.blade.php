@@ -7,7 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'GEOMEET') }}</title>
+
+    <!-- Icono -->
+    <link rel="shortcut icon" href="{{ asset('1.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('1.png') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -15,15 +19,19 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/ee69a94543.js" crossorigin="anonymous"></script>
 </head>
 <body>
     @include('flash')
     <div id="app">
+        <!-- https://blog.logrocket.com/five-cool-css-header-styles-with-cross-browser-compatibility/ -->
+        <!-- AQUI SERIA EL HEADER -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <img src="/img/2.png" height="60" width="60"/>
+                <h1>GEOMEET</h1>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,7 +41,7 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-
+                    @include('partials.language-switcher')
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -72,10 +80,12 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
+        <main>
+            
         </main>
+        <footer>
+            @yield('content')
+        </footer>
     </div>
 </body>
 </html>

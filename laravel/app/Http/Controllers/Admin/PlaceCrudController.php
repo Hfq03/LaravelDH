@@ -31,6 +31,9 @@ class PlaceCrudController extends CrudController
         CRUD::setEntityNameStrings('places', 'places');
         $this->crud->denyAccess(['create','delete','update']);
 
+        if (!backpack_user()->hasRole('admin')) {
+            CRUD::denyAccess(['list','create','read','edit','delete']);
+        }
     }
 
     /**

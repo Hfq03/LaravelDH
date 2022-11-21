@@ -37,12 +37,16 @@ Route::get('mail/test', [MailController::class, 'test'])->middleware(['auth', 'v
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'language']);
 
-Route::resource('files', FileController::class)->middleware(['auth']);
+Route::resource('files', FileController::class)
+   ->middleware(['auth', 'permission:files']);
 
-Route::resource('places', PlacesController::class);
+Route::resource('places', PlacesController::class)
+    ->middleware(['auth', 'permission:places']);;
 
-Route::resource('post', PostController::class);
+Route::resource('post', PostController::class)
+    ->middleware(['auth', 'permission:post']);;
 
-Route::resource('places', PlacesController::class);
+
 

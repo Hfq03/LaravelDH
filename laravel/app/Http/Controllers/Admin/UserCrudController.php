@@ -12,5 +12,11 @@ class UserCrudController extends PM_UserCrudController
    {
        parent::setup();
        // Add your code here
+        if (!backpack_user()->hasRole('admin')) {
+            CRUD::denyAccess(['list','create','read','edit','delete']);
+        }
+
+
+
    }
 }
