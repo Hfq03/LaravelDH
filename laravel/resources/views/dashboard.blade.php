@@ -22,6 +22,7 @@
         <div><i class="fa-solid fa-square-plus fa-3x"></i></div>
         <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
         <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+        <div><a href="{{ url('/files') }}" class="btn btn-primary">Files</a></div>
     </div>
     @endsection
 
