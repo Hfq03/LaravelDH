@@ -69,12 +69,12 @@ class FileController extends Controller
            \Log::debug("DB storage OK");
            // Patró PRG amb missatge d'èxit
            return redirect()->route('files.show', $file)
-               ->with('success', 'File successfully saved');
+               ->with('success', __('File successfully saved'));
        } else {
            \Log::debug("Local storage FAILS");
            // Patró PRG amb missatge d'error
            return redirect()->route("files.create")
-               ->with('error', 'ERROR uploading file');
+               ->with('error', __('ERROR uploading file'));
        }
    }
 
@@ -144,12 +144,12 @@ class FileController extends Controller
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', 'File successfully saved');
+                ->with('success', __('File successfully saved'));
         } else {
             \Log::debug("Local storage FAILS");
             // Patró PRG amb missatge d'error
             return redirect()->route("files.edit")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
     }
 
@@ -166,11 +166,11 @@ class FileController extends Controller
             Storage::delete('id');
             Storage::disk('public')->exists($file->filepath);
             return redirect()->route('files.index', $file)
-                ->with('success', 'File successfully delete');
+                ->with('success', __('File successfully delete'));
         } else {
             \Log::debug("Local storage FAILS");
             return redirect()->route("files.show", $file)
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
     }
 

@@ -52,10 +52,10 @@ class User extends Authenticatable
     ];
     public function places()
     {
-        return $this->hasMany(Places::class);
+        return $this->hasMany(Places::class,'author_id');
     }
     public function post()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class,'author_id');
     }
 }

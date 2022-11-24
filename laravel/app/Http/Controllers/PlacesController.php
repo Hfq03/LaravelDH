@@ -95,13 +95,13 @@ class PlacesController extends Controller
             \Log::debug("DB storage OK");
 
             return redirect()->route('places.show', $place)
-                ->with('success', 'File successfully saved');
+                ->with('success', __('File successfully saved'));
 
         } else {
             \Log::debug("Local storage FAILS");
 
             return redirect()->route("files.create")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
 
     }
@@ -200,13 +200,13 @@ class PlacesController extends Controller
             $place->save();
 
             return redirect()->route('places.show', $place)
-                ->with('success', 'Place Successfully Saved');
+                ->with('success', __('Place Successfully Saved'));
 
         } else {
             \Log::debug("Local storage FAILS");
 
             return redirect()->route("places.edit")
-                ->with('error', 'ERROR Uploading Place');
+                ->with('error', __('ERROR Uploading Place'));
         }
     }
 
@@ -229,13 +229,13 @@ class PlacesController extends Controller
             \Log::debug("Local storage OK");
 
             return redirect()->route('places.show', $place)
-                ->with('error','Error place already exist');
+                ->with('error', __('Error place already exist'));
         }
         else{
             \Log::debug("Place Delete");
 
             return redirect()->route("places.index")
-                ->with('success', 'Place Successfully Deleted');
+                ->with('success', __('Place Successfully Deleted'));
         }
     }
 }

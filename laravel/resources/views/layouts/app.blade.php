@@ -84,7 +84,7 @@
             
         </main>
         <footer>
-            @yield('content')
+            <center>@yield('content')</center>
         </footer>
     </div>
 </body>

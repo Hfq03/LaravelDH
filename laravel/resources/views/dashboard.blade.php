@@ -16,13 +16,13 @@
         </div>
     </div>
     @section('content')
-    <ul>
-        <li><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></a></i></li>
-        <li><i class="fa-solid fa-heart fa-3x"></i></li>
-        <li><i class="fa-solid fa-square-plus fa-3x"></i></li>
-        <li><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></li>
-        <li><i class="fa-solid fa-circle-user fa-3x"></i></li>
-    </ul>
+    <div class="flex-container">
+        <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></a></i></div>
+        <div><i class="fa-solid fa-heart fa-3x"></i></div>
+        <div><i class="fa-solid fa-square-plus fa-3x"></i></div>
+        <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+        <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+    </div>
     @endsection
 
 </x-app-layout>

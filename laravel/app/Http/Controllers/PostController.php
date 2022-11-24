@@ -91,13 +91,13 @@ public function store(Request $request)
             \Log::debug("DB storage OK");
 
             return redirect()->route('post.show', $post)
-                ->with('success', 'File successfully saved');
+                ->with('success', __('File successfully saved'));
 
         } else {
             \Log::debug("Local storage FAILS");
 
             return redirect()->route("post.create")
-                ->with('error', 'ERROR uploading file');
+                ->with('error', __('ERROR uploading file'));
         }
 
     }
@@ -190,13 +190,13 @@ public function store(Request $request)
             $post->save();
 
             return redirect()->route('post.show', $post)
-                ->with('success', 'Post Successfully Saved');
+                ->with('success', __('Post Successfully Saved'));
 
         } else {
             \Log::debug("Local storage FAILS");
 
             return redirect()->route("post.edit")
-                ->with('error', 'ERROR Uploading Post');
+                ->with('error', __('ERROR Uploading Post'));
         }
     }
 
@@ -221,12 +221,12 @@ public function store(Request $request)
             \Log::debug("Local storage OK");
 
             return redirect()->route('post.show', $place)
-                ->with('error','Error place already exist');
+                ->with('error', __('Error place already exist'));
         } else {
             \Log::debug("Post Delete");
 
             return redirect()->route("post.index")
-                ->with('success', 'Place Successfully Deleted');
+                ->with('success', __('Place Successfully Deleted'));
         }
     }
 }
