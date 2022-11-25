@@ -7,7 +7,7 @@ const form = document.getElementById("create")
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...
-   document.querySelector("#fError").innerHTML = "";
+   document.querySelector("#pError").innerHTML = "";
 
    // Create validation
    let data = {
@@ -29,8 +29,8 @@ form.addEventListener("submit", function( event ) {
        for(let inputName in errors) {
            // ...
            let message = errors[inputName]
-           document.getElementById("fError").innerHTML=message;
-           document.getElementById("fError").classList.remove("errorHidden");
+           document.getElementById("pError").innerHTML=message;
+           document.getElementById("pError").classList.remove("errorHidden");
 
        }
        // Avoid submit

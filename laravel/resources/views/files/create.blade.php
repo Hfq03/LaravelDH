@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <input type="file" class="form-control" name="upload"/>
                     </div>
-                    <p id="mError"></p>
+                    <p id="fError" class="alert alert-danger alert-dismissible fade show errorHidden"></p>
                     <button type="submit" class="btn btn-primary">Create</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
                     </form>

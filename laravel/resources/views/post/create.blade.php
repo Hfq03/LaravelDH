@@ -19,14 +19,16 @@
            <div class="card">
                <div class="card-header">{{ __('Post') }}</div>
                <div class="card-body">
-               <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
+               <form id="create" method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
                     @csrf
+                    @vite('resources/js/post/create.js')
                     <label for="body">Body</label><br>
                     <input type="text" id="body" name="body"><br>
                     <div class="form-group">
                         <label for="upload">File:</label>
                         <input type="file" class="form-control" name="upload"/>
                     </div>
+                    <p id="pError" class="alert alert-danger alert-dismissible fade show errorHidden"></p>
                     <label for="latitude">Latitude</label><br>
                     <input type="text" id="latitude" name="latitude"><br>
                     <label for="longitude">Longitude</label><br>
