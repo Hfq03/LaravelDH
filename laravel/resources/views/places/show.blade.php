@@ -28,7 +28,7 @@
                                 <td><img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td>
                                 <td>{{ $place->name }}</td>
                                 <td>{{ $place->description }}</td>
-                                <td>{{ $author->name }}</td>
+                                <td>{{ $place->user->name }}</td>
                                 <td>{{ $place->created_at }}</td>
                                 <td>{{ $place->updated_at }}</td>
                             </tr>

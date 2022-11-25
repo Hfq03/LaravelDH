@@ -110,8 +110,10 @@ public function store(Request $request)
      */
     public function show(Post $post)
     {
+        $file = File::find($post->file_id);
         return view("post.show", [
             "post" => $post,
+            "file" => $file,
             "author" => $post->user,
         ]);
     }

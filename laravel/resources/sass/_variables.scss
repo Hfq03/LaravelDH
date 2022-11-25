@@ -60,7 +60,7 @@ footer i{
     margin: 0 0.2em;
 }
 
-.flex-container {
+footer .flex-container {
     margin:auto;
     display: flex;
     justify-content: center;   
@@ -75,7 +75,7 @@ footer i{
 
 }
 
-.flex-container > div{
+footer .flex-container > div{
     border-radius: 5px;
     padding: 8px;
 }

@@ -11,14 +11,14 @@
                        <thead>
                            <tr>
                                <td scope="col">ID</td>
-                               <td scope="col">Body</td>
-                               <td scope="col">File</td>
-                               <td scope="col">Latitude</td>
-                               <td scope="col">Longitude</td>
-                               <td scope="col">Visibility</td>
-                               <td scope="col">Author</td>
-                               <td scope="col">Created</td>
-                               <td scope="col">Updated</td>
+                               <td scope="col">{{ __('fields.body') }}</td>
+                               <td scope="col">{{ __('fields.file_id') }}</td>
+                               <td scope="col">{{ __('fields.latitude') }}</td>
+                               <td scope="col">{{ __('fields.longitude') }}</td>
+                               <td scope="col">{{ __('fields.visibility_id') }}</td>
+                               <td scope="col">{{ __('fields.author_id') }}</td>
+                               <td scope="col">{{ __('fields.created_at') }}</td>
+                               <td scope="col">{{ __('fields.updated_at') }}</td>
                            </tr>
                        </thead>
                        <tbody>

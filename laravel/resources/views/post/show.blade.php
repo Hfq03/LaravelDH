@@ -29,11 +29,11 @@
                                <td>{{ $post->id }}</a></td>
                                <td>{{ $post->body }}</td>
                                <!--<td>{{ $post->file_id }}</td>-->
-                               <td><img class="img-fluid" src="{{ asset("storage/{$post->filepath}") }}" /></td>
+                               <td><img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td>
                                <td>{{ $post->latitude }}</td>
                                <td>{{ $post->longitude }}</td>
                                <td>{{ $post->visibility_id }}</td>
-                               <td>{{ $author->name }}</td>
+                               <td>{{ $post->user->name }}</td>
                                <td>{{ $post->created_at }}</td>
                                <td>{{ $post->updated_at }}</td>
                            </tr>
