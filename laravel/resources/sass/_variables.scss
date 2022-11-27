@@ -78,3 +78,13 @@ h2{
     text-decoration: none;
     color: black;
 }
+.ederecha{
+    text-align: left;
+    display:flex;
+    justify-content: space-between;
+}
+.eizquierda{
+    text-align: right;
+    display:flex;
+    justify-content: space-between;
+}
