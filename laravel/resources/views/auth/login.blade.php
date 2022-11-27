@@ -1,73 +1,87 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<section class="user">
+  <div class="user_options-container">
+    <div class="user_options-text">
+      <div class="user_options-unregistered">
+        <h2 class="user_unregistered-title">¿No tienes cuenta?</h2>
+        <p class="user_unregistered-text">Crea una cuenta de manera gratuita haciendo click en el botón de abajo.</p>
+        <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+      </div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('fields.Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('fields.Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+      <div class="user_options-registered">
+        <h2 class="user_registered-title">¿Ya tienes cuenta?</h2>
+        <p class="user_registered-text">Accede con tus credenciales haciendo click en el botón de abajo.</p>
+        <button class="user_registered-login" id="login-button">Login</button>
+      </div>
     </div>
-</div>
+    
+    <div class="user_options-forms" id="user_options-forms">
+      <div class="user_forms-login">
+        <h1>LOGIN</h1>
+        <form method="POST" action="{{ route('login') }}" class="forms_form">
+        @csrf
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+                <input id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ __('fields.Email Address') }}" class="forms_field-input form-control @error('email') is-invalid @enderror" required autocomplete="email" autofocus />
+            </div>
+            <div class="forms_field">
+                <input id="password" name="password" type="password" placeholder="{{ __('fields.Password') }}" class="forms_field-input form-control @error('password') is-invalid @enderror" required autocomplete="current-password" />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            
+            @if (Route::has('password.request'))
+                <a href="{{ route('password.request') }}" class="forms_buttons-forgot">
+                    {{ __('fields.Forgot Your Password?') }}
+                </a>
+            @endif
+            <button type="submit" class="btn btn-primary forms_buttons-action">
+                {{ __('fields.Login') }}
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="user_forms-signup">
+        <h1>SIGN UP</h1>
+        <form method="POST" action="{{ route('register') }}" class="forms_form">
+        @csrf
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+                <input id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ __('fields.Name') }}" class="forms_field-input form-control @error('name') is-invalid @enderror" required autocomplete="name" autofocus />
+            </div>
+            <div class="forms_field">
+                <input id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ __('fields.Email Address') }}" class="forms_field-input form-control @error('email') is-invalid @enderror" required autocomplete="email" />
+            </div>
+            <div class="forms_field">
+                <input id="password" name="password" type="password" placeholder="{{ __('fields.Password') }}" class="forms_field-input form-control @error('password') is-invalid @enderror" required autocomplete="new-password" />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="submit" class="btn btn-primary forms_buttons-action">
+                {{ __('fields.Register') }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    const signupButton = document.getElementById('signup-button'),
+        loginButton = document.getElementById('login-button'),
+        userForms = document.getElementById('user_options-forms')
+
+    signupButton.addEventListener('click', () => {
+    userForms.classList.remove('bounceRight')
+    userForms.classList.add('bounceLeft')
+    }, false)
+
+    loginButton.addEventListener('click', () => {
+    userForms.classList.remove('bounceLeft')
+    userForms.classList.add('bounceRight')
+    }, false)
+
+</script>
 @endsection

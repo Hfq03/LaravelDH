@@ -1,7 +1,7 @@
 <?php
  
 return [
-   'name' => 'nombre',
+   'Name' => 'Nombre',
    'description' => 'descripción',
    'latitude' => 'latitud',
    'longitude' => 'longitud',
@@ -14,4 +14,9 @@ return [
    'body' => 'cuerpo',
    'Email Address' => 'Dirección Email',
    'Password' => 'Contraseña',
+   'Forgot Your Password?' => '¿Olvidaste la contraseña?',
+   'Login' => 'Iniciar sesión',
+   'Register' => 'Registrar',
+   'Reset Password' => 'Resetear Contraseña',
+   'Send Password Reset Link' => 'Enviar Enlace Para Resetear La Contraseña'
 ];

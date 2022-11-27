@@ -51,10 +51,10 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
+                            
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -81,11 +81,21 @@
             </div>
         </nav>
         <main>
-            
+            @yield('content')
         </main>
-        <footer>
-            <center>@yield('content')</center>
-        </footer>
+        @if(str_contains(url()->current(), '/login'))
+        
+        @else
+            <div class="flex-container">
+                <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></a></i></div>
+                <div><i class="fa-solid fa-heart fa-3x"></i></div>
+                <div><i class="fa-solid fa-square-plus fa-3x"></i></div>
+                <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+            </div>
+        @endif
+        
     </div>
 </body>
 </html>
