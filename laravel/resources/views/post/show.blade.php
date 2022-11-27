@@ -14,14 +14,14 @@
                         <thead>
                            <tr>
                                <td scope="col">ID</td>
-                               <td scope="col">Body</td>
-                               <td scope="col">File</td>
-                               <td scope="col">Latitude</td>
-                               <td scope="col">Longitude</td>
-                               <td scope="col">Visibility</td>
-                               <td scope="col">Author</td>
-                               <td scope="col">Created</td>
-                               <td scope="col">Updated</td>
+                               <td scope="col">{{ __('fields.body') }}</td>
+                               <td scope="col">{{ __('fields.file') }}</td>
+                               <td scope="col">{{ __('fields.latitude') }}</td>
+                               <td scope="col">{{ __('fields.longitude') }}</td>
+                               <td scope="col">{{ __('fields.visibility_id') }}</td>
+                               <td scope="col">{{ __('fields.author') }}</td>
+                               <td scope="col">{{ __('fields.created_at') }}</td>
+                               <td scope="col">{{ __('fields.updated_at') }}</td>
                            </tr>
                        </thead>
                        <tbody>
@@ -39,8 +39,9 @@
                            </tr>
                        </tbody>
                     </table>
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                    <a class="btn btn-primary" href="{{ route('post.edit',$post) }}" role="button">Edit</a>
+                    <button type="submit" class="btn btn-primary">{{ __('fields.delete') }}</button>
+                    <a class="btn btn-primary" href="{{ route('post.edit',$post) }}" role="button">{{ __('fields.edit') }}</a>
+                    <a class="btn btn-secondary" href="{{ route('post.index',$post) }}" role="button">{{ __('fields.back') }}</a>
                </div>
            </div>
        </div>

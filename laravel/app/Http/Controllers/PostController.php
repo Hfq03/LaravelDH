@@ -18,8 +18,9 @@ class PostController extends Controller
     {
         return view("post.index", [
             "post" => Post::all(),
+            "files" => File::all(),
         ]);
-    }
+    }   
 
     /**
      * Show the form for creating a new resource.
@@ -126,11 +127,15 @@ public function store(Request $request)
      */
     public function edit(Post $post)
     {
-        $file = File::find($post->file_id);
-        return view("post.edit", [
-            "post" => $post,
-            'file' => $file,
-        ]);
+        if(auth()->user()->id == $post->author_id){
+            $file = File::find($post->file_id);
+            return view("post.edit", [
+                "post" => $post,
+                'file' => $file,
+            ]);
+        }else{
+            return abort('403');
+        }
     }
 
     /**

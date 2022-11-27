@@ -14,12 +14,12 @@
                             <thead>
                                 <tr>
                                     <td scope="col">ID</td>
-                                    <td scope="col">Body</td>
-                                    <td scope="col">File</td>
-                                    <td scope="col">Latitude</td>
-                                    <td scope="col">Longitude</td>
-                                    <td scope="col">Visibility</td>
-                                    <td scope="col">Author</td>
+                                    <td scope="col">{{ __('fields.body') }}</td>
+                                    <td scope="col">{{ __('fields.file') }}</td>
+                                    <td scope="col">{{ __('fields.latitude') }}</td>
+                                    <td scope="col">{{ __('fields.longitude') }}</td>
+                                    <td scope="col">{{ __('fields.visibility_id') }}</td>
+                                    <td scope="col">{{ __('fields.author') }}</td>
                                     <td scope="col">Created</td>
                                     <td scope="col">Updated</td>
                                 </tr>
@@ -28,29 +28,30 @@
                                 <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->body }}</td>
-                                    <td>{{ $post->file_id }}</td>
+                                    <td><img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td>
                                     <td>{{ $post->latitude }}</td>
                                     <td>{{ $post->longitude }}</td>
                                     <td>{{ $post->visibility_id }}</td>
-                                    <td>{{ $post->author_id }}</td>
+                                    <td>{{ $post->user->name }}</td>
                                     <td>{{ $post->created_at }}</td>
                                     <td>{{ $post->updated_at }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="form-group">
-                            <label for="body">Body</label><br>
+                            <label for="body">{{ __('fields.body') }}</label><br>
                             <input type="text" id="body" name="body"><br>
-                            <label for="latitude">Latitude</label><br>
+                            <label for="latitude">{{ __('fields.latitude') }}</label><br>
                             <input type="text" id="latitude" name="latitude"><br>
-                            <label for="longitude">Longitude</label><br>
+                            <label for="longitude">{{ __('fields.longitude') }}</label><br>
                             <input type="text" id="longitude" name="longitude"><br>
-                            <label for="visibility_id">Visibility</label><br>
+                            <label for="visibility_id">{{ __('fields.visibility_id') }}</label><br>
                             <input type="text" id="visibility_id" name="visibility_id"><br>
-                            <label for="upload">Update:</label>
+                            <label for="upload">{{ __('fields.update') }}:</label>
                             <input type="file" class="form-control" name="upload"/>
                             <br>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">{{ __('fields.update') }}</button>
+                            <a class="btn btn-secondary" href="{{ route('post.index') }}" role="button">{{ __('fields.back') }}</a>
                         </div> 
                     </form>
                      

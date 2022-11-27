@@ -48,5 +48,8 @@ Route::resource('places', PlacesController::class)
 Route::resource('post', PostController::class)
     ->middleware(['auth', 'permission:post']);;
 
+Route::post('/post/{post}/likes', [App\Http\Controllers\PostController::class, 'likes']);
+Route::delete('/post/{post}/likes', [App\Http\Controllers\PostController::class, 'unlikes']);
+
 
 
