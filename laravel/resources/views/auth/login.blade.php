@@ -68,6 +68,13 @@
     </div>
   </div>
 </section>
+<style>
+  body{
+    overflow-x:scroll;
+    overflow-x:hidden;
+    overflow-y:hidden;
+  }
+</style>
 <script>
     const signupButton = document.getElementById('signup-button'),
         loginButton = document.getElementById('login-button'),

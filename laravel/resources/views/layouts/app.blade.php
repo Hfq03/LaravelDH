@@ -83,7 +83,7 @@
         <main>
             @yield('content')
         </main>
-        @if(str_contains(url()->current(), '/login'))
+        @if(str_contains(url()->current(), '/login') || str_contains(url()->current(), '/password/reset'))
         
         @else
             <div class="flex-container">
