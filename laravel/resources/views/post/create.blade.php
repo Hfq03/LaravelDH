@@ -21,23 +21,22 @@
                <div class="card-body">
                <form id="create" method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @vite('resources/js/post/create.js')
-                    <label for="body">Body</label><br>
+                    <label for="body">{{ __('fields.body') }}</label><br>
                     <input type="text" id="body" name="body"><br>
                     <div class="form-group">
-                        <label for="upload">File:</label>
+                        <label for="upload">{{ __('fields.upload') }}</label>
                         <input type="file" class="form-control" name="upload"/>
                     </div>
                     <p id="pError" class="alert alert-danger alert-dismissible fade show errorHidden"></p>
-                    <label for="latitude">Latitude</label><br>
+                    <label for="latitude">{{ __('fields.latitude') }}</label><br>
                     <input type="text" id="latitude" name="latitude"><br>
-                    <label for="longitude">Longitude</label><br>
+                    <label for="longitude">{{ __('fields.longitude') }}</label><br>
                     <input type="text" id="longitude" name="longitude"><br>
-                    <label for="visibility_id">Visibility</label><br>
+                    <label for="visibility_id">{{ __('fields.visibility_id') }}</label><br>
                     <input type="text" id="visibility_id" name="visibility_id"><br><br>
                     <button type="submit" class="btn btn-primary">Create</button>
                     <button type="reset" class="btn btn-secondary">Reset</button>
-                    </form>
+                </form>
                 </div>
            </div>
        </div>

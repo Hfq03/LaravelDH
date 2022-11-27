@@ -1,51 +1,47 @@
 @extends('layouts.app')
  
 @section('content')
-<div class="container">
-   <div class="row justify-content-center">
-       <div class="col-md-8">
-           <div class="card">
-               <div class="card-header">{{ __('Places') }}</div>
-               <div class="card-body">
-                   <table class="table">
-                       <thead>
-                           <tr>
-                               <td scope="col">ID</td>
-                               <td scope="col">{{ __('fields.name') }}</td>
-                               <td scope="col">{{ __('fields.description') }}</td>
-                               <td scope="col">{{ __('fields.file_id') }}</td>
-                               <td scope="col">{{ __('fields.latitude') }}</td>
-                               <td scope="col">{{ __('fields.longitude') }}</td>
-                               <td scope="col">{{ __('fields.category_id') }}</td>
-                               <td scope="col">{{ __('fields.visibility_id') }}</td>
-                               <td scope="col">{{ __('fields.author_id') }}</td>
-                               <td scope="col">{{ __('fields.created_at') }}</td>
-                               <td scope="col">{{ __('fields.updated_at') }}</td>
-                           </tr>
-                       </thead>
-                       <tbody>
-                           @foreach ($places as $place)
-                           <tr>
-                               <td><a href="{{ route('places.show',$place) }}">{{ $place->id }}</a></td>
-                               <td>{{ $place->name }}</td>
-                               <td>{{ $place->description }}</td>
-                               <td>{{ $place->file_id }}</td>
-                               <td>{{ $place->latitude }}</td>
-                               <td>{{ $place->longitude }}</td>
-                               <td>{{ $place->category_id }}</td>
-                               <td>{{ $place->visibility_id }}</td>
-                               <td>{{ $place->author_id }}</td>
-                               <td>{{ $place->created_at }}</td>
-                               <td>{{ $place->updated_at }}</td>
-                           </tr>
-                           @endforeach
-                       </tbody>
-                   </table>
-                   <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">Add new file</a>
-               </div>
-           </div>
-       </div>
-   </div>
+<div class="containerPlace">
+    @foreach ($places as $place)
+        @foreach ($files as $file)
+            @if($file->id == $place->file_id)
+                <a href="{{ route('places.show',$place) }}"><div class="card">
+                    <img src="/img/fotocarnet.jpg" class="profImg"/>
+                    <p>{{$place->user->name }}</p>
+                    <div class="card__image">
+                        <img src='{{ asset("storage/{$file->filepath}")}}' height="100%" width="100%" />
+                    </div>
+                    <div class="car__info--title">
+                        <h3>{{$place->name }}</h3>
+                        <p>{{$place->description }}</p>
+                    </div>
+                    <div>
+                        @if ($place->category_id == 1)
+                            <span class="fa fa-star checked"></span>
+                        @elseif ($place->category_id == 2)
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        @elseif ($place->category_id == 3)
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        @elseif ($place->category_id == 4)
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        @elseif ($place->category_id == 5)
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        @endif
+                    </div>
+                </div></a>
+            @endif
+        @endforeach
+    @endforeach    
 </div>
 
 @endsection

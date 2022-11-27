@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlacesController;
+use App\Http\Controllers\LikesController;
+use App\Http\Controllers\NuevaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,10 +45,13 @@ Route::resource('files', FileController::class)
 ->middleware(['auth', /*'permission:files'*/]);
 
 Route::resource('places', PlacesController::class)
-    ->middleware(['auth', 'permission:places']);;
+    ->middleware(['auth', 'permission:places']);
 
 Route::resource('post', PostController::class)
-    ->middleware(['auth', 'permission:post']);;
+    ->middleware(['auth', 'permission:post']);
 
+Route::resource('likes', LikesController::class)
+    ->middleware(['auth']);
 
-
+Route::resource('nueva', NuevaController::class)
+    ->middleware(['auth']);

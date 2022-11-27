@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'GEOMEET') }}</title>
+    <title>GEOMEET</title>
 
     <!-- Icono -->
     <link rel="shortcut icon" href="{{ asset('1.png') }}">
@@ -30,8 +30,9 @@
         <!-- AQUI SERIA EL HEADER -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img src="/img/2.png" height="60" width="60"/>
-                <h1>GEOMEET</h1>
+                <a href="{{ route('dashboard') }}"><img src="/img/2.png" height="50" width="50"/></a>
+                <a href="{{ route('dashboard') }}" style="text-decoration:none; display:flex; align-items: center;"><h1>GEOMEET</h1></a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -41,9 +42,10 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-                    @include('partials.language-switcher')
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        @include('partials.language-switcher')
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -86,16 +88,72 @@
         @if(str_contains(url()->current(), '/login') || str_contains(url()->current(), '/password/reset'))
         
         @else
+            @if(str_contains(url()->current(), '/dashboard'))
+                <div class="flex-container">
+                    <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
+                    <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
+                    <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                    <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                    <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+                </div>
+            @elseif(str_contains(url()->current(), '/post'))
+                <div class="flex-container">
+                    <div style="background-color: #22252C;"><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x" style="color: white;"></i></a></div>
+                    <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
+                    <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                    <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                    <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+                </div>
+            @elseif (str_contains(url()->current(), '/likes'))
+                <div class="flex-container">
+                    <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
+                    <div style="background-color: #22252C"><i class="fa-solid fa-heart fa-3x" style="color: #e14658;"></i></div>
+                    <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                    <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                    <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+                </div>
+            @elseif (str_contains(url()->current(), '/nueva'))
+                <div class="flex-container">
+                    <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
+                    <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
+                    <div style="background-color: #22252C;"><i class="fa-solid fa-square-plus fa-3x" style="color: white;"></i></div>
+                    <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                    <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+                </div>
+            @elseif (str_contains(url()->current(), '/places'))
             <div class="flex-container">
                 <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></a></i></div>
-                <div><i class="fa-solid fa-heart fa-3x"></i></div>
-                <div><i class="fa-solid fa-square-plus fa-3x"></i></div>
-                <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></i></div>
+                <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                <div style="background-color: #22252C;"><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x" style="color: white;"></i></a></div>
                 <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                 <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
             </div>
+            @elseif (str_contains(url()->current(), '/files'))
+                <div class="flex-container">
+                    <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
+                    <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
+                    <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                    <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div style="background-color: #22252C;"><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x" style="color: white;"></i></a></div>
+                    <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
+                </div>
+            @elseif (str_contains(url()->current(), '/profile'))
+            <div class="flex-container">
+                <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
+                <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></div>
+                <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                <div style="background-color: #22252C;"><i class="fa-solid fa-circle-user fa-3x" style="color: white;"></i></div>
+            </div>
+            @endif
         @endif
-        
+
     </div>
 </body>
 </html>

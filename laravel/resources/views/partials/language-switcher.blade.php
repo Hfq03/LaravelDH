@@ -4,7 +4,7 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     @foreach($availableLocales as $locale => $localeName)
-        @if($locale !== $currentLocale)
+        @if($locale !== 'en')
             <li><a class="dropdown-item" href="{{ url('language/'.$locale) }}">{{ $localeName }} ({{ $locale }})</a></li>
         @endif
     @endforeach

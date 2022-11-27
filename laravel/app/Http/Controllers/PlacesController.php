@@ -16,7 +16,8 @@ class PlacesController extends Controller
     public function index()
     {
         return view("places.index", [
-            "places" => Places::all()
+            "places" => Places::all(),
+            "files" => File::all()
         ]);
     }
 
@@ -238,4 +239,29 @@ class PlacesController extends Controller
                 ->with('success', __('Place Successfully Deleted'));
         }
     }
+
+    public function favourite(Places $place){
+
+        $favourite = Favourite::create([
+            'id_user' => auth()->user()->id,
+            'id_place' => $place->id,
+        ]);
+
+        return redirect()->back();
+
+    }
+
+    public function unfavourite(Places $place){
+
+        $id_place = $place->id;
+        $id_user = auth()->user()->id;
+        $id_favourite = "Select id FROM favourites WHERE id_place= $id_place  and id_user = $id_user";
+
+        return redirect()->back();
+
+    }
+
+
+
+
 }
