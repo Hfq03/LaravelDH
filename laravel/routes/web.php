@@ -56,5 +56,5 @@ Route::resource('likes', LikesController::class)
 Route::resource('nueva', NuevaController::class)
     ->middleware(['auth']);
 
-Route::post('/places/{place}/favourites', [App\Http\Controllers\PlaceController::class, 'favourite'])->name('place.favourite');
-Route::delete('/places/{place}/favourites', [App\Http\Controllers\PlaceController::class, 'unfavourite'])->name('place.unfavourite');
+Route::post('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'favourite'])->name('places.favourite');
+Route::delete('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'unfavourite'])->name('places.unfavourite');

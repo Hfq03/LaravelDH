@@ -264,8 +264,8 @@ class PlacesController extends Controller
     public function favourite(Places $place){
 
         $favourite = Favourite::create([
-            'id_user' => auth()->user()->id,
-            'id_place' => $place->id,
+            'user_id' => auth()->user()->id,
+            'place_id' => $place->id,
         ]);
 
         return redirect()->back();
@@ -274,10 +274,7 @@ class PlacesController extends Controller
 
     public function unfavourite(Places $place){
 
-        $id_place = $place->id;
-        $id_user = auth()->user()->id;
-        $id_favourite = comprobar_favourite();
-        $id_favourite->delete();
+        Favourite::where('user_id',auth()->user()->id)->where('place_id',$place->id)->delete();
         
         return redirect()->back();
 

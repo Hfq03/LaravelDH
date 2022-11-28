@@ -53,21 +53,6 @@
                     <span class="fa fa-star checked"></span>
                 </div>
             @endif
-            @if($control == true)
-                <form id="favourite" method="post" action="{{route('place.favourite',$place)}}" enctype="multipart/form-data">
-                    @csrf
-                    <div>
-                        <button type="submit"><i class="fa-solid fa-bookmark fa-lg"></i></button>
-                    </div>
-                </form>
-            @else
-                <form id="unfavourite" method="post" action="{{route('place.unfavourite',$place)}}" enctype="multipart/form-data">
-                    @csrf
-                    <div>
-                        <button type="submit"><i class="fa-regular fa-bookmark fa-lg"></i></i></button>
-                    </div>
-                </form>
-            @endif
         </div>
         <br>
         <div>
@@ -75,5 +60,21 @@
             <a class="btn btn-primary" href="{{ route('places.edit',$place) }}" role="button">Edit</a>
         </div>
     </form>
+    @if($control == false)
+        <form id="favourite" method="post" action="{{route('places.favourite',$place)}}" enctype="multipart/form-data">
+            @csrf
+            <div>
+                <button type="submit"><i class="fa-regular fa-bookmark fa-lg"></i></button>
+            </div>
+        </form>
+    @else
+        <form id="unfavourite" method="post" action="{{route('places.unfavourite',$place)}}" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <div>
+                <button type="submit"><i class="fa-solid fa-bookmark fa-lg"></i></i></button>
+            </div>
+        </form>
+    @endif
 </div>
 @endsection
