@@ -44,7 +44,6 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        @include('partials.language-switcher')
                         <!-- Authentication Links -->
                         @include('partials.language-switcher')
                         @guest
