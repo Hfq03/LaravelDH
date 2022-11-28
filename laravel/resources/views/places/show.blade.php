@@ -5,12 +5,14 @@
     <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
         @csrf
         @method('DELETE')
-        <div style="display:flex; justify-content:left; margin-top:0;">
-            <img src="/img/fotocarnet.jpg" class="profImg"/>
-            <h3 style="margin-top: 1.3em; text-transform: lowercase;">{{'@'.$place->user->name }}</h3>
-            <div style="justify-content:right;">
-                <i class="fa-regular fa-xmark"></i>            
+        <div style="display:flex; justify-content: space-between">
+            <div style="display:flex; justify-content:left; margin-top:0;">
+                <img src="/img/fotocarnet.jpg" class="profImg"/>
+                <h3 style="margin-top: 0.83em; text-transform: lowercase;">{{'@'.$place->user->name }}</h3>
             </div>
+            <div style="display:flex; justify-content:right;">
+                <a href="{{ url('/places') }}" style="text-decoration: none;"><i class="fa-solid fa-xmark fa-2x" style="color:#22252C;"></i></a>            
+            </div>  
         </div>
         <div class="card__image" style="margin-top:0.5em; width:800px; height:300px; border:1px solid black;">
             <img src='{{ asset("storage/{$file->filepath}")}}' height="100%" width="100%"/>

@@ -526,7 +526,6 @@ body {
   display:flex;
   justify-content: center; 
   align-items: center; 
-  border: 1px solid black;
   margin: 50px 0 50px 0;
 }
 
@@ -534,7 +533,6 @@ body {
   width: 60em;
   height: 40em;
   padding:2em;
-  border:1px solid red;
 }
 
 .containerPlace p{
@@ -576,7 +574,7 @@ body {
     margin-left:5%;
     margin-top:3%;
     border-radius:50%;
-    border: 2px solid linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%) !important;
+    border: 2px solid rgb(226, 78, 24);
     object-fit: cover;
 }
 
