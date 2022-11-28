@@ -1,45 +1,65 @@
 @extends('layouts.app')
  
 @section('content')
-<div class="container">
-   <div class="row justify-content-center">
-       <div class="col-md-8">
-           <div class="card">
-               <div class="card-header">{{ __('Places') }}</div>
-               <div class="card-body">
-                <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('DELETE')
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td scope="col">ID</td>
-                                <td scope="col">Filepath</td>
-                                <td scope="col">Name</td>
-                                <td scope="col">Description</td>
-                                <td scope="col">Author</td>
-                                <td scope="col">Created</td>
-                                <td scope="col">Updated</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{{ $place->id }}</td>
-                                <td><img class="img-fluid" src="{{ asset("storage/{$file->filepath}") }}" /></td>
-                                <td>{{ $place->name }}</td>
-                                <td>{{ $place->description }}</td>
-                                <td>{{ $place->user->name }}</td>
-                                <td>{{ $place->created_at }}</td>
-                                <td>{{ $place->updated_at }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                    <a class="btn btn-primary" href="{{ route('places.edit',$place) }}" role="button">Edit</a>
-               </div>
-           </div>
-       </div>
-   </div>
+<div class="containerPlace2">
+    <form method="post" action="{{ route('places.destroy',$place) }}" enctype="multipart/form-data">
+        @csrf
+        @method('DELETE')
+        <div style="display:flex; justify-content:left; margin-top:0;">
+            <img src="/img/fotocarnet.jpg" class="profImg"/>
+            <h3 style="margin-top: 1.3em; text-transform: lowercase;">{{'@'.$place->user->name }}</h3>
+            <div style="justify-content:right;">
+                <i class="fa-regular fa-xmark"></i>            
+            </div>
+        </div>
+        <div class="card__image" style="margin-top:0.5em; width:800px; height:300px; border:1px solid black;">
+            <img src='{{ asset("storage/{$file->filepath}")}}' height="100%" width="100%"/>
+        </div>
+        <div class="car__info">
+            <h3>{{$place->name }}</h3>
+            <p>{{$place->description }}</p>
+        </div>
+        <div class="starsIcons">
+            @if ($place->category_id == 1)
+                <div>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            @elseif ($place->category_id == 2)
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            @elseif ($place->category_id == 3)
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            @elseif ($place->category_id == 4)
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            @elseif ($place->category_id == 5)
+                <div>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                </div>
+            @endif
+            <div>
+                <i class="fa-regular fa-bookmark fa-lg"></i>
+            </div>
+        </div>
+        <br>
+        <div>
+            <button type="submit" class="btn btn-primary">Delete</button>
+            <a class="btn btn-primary" href="{{ route('places.edit',$place) }}" role="button">Edit</a>
+        </div>
+    </form>
 </div>
-
 @endsection

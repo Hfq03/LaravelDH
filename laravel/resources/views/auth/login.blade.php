@@ -5,13 +5,13 @@
   <div class="user_options-container">
     <div class="user_options-text">
       <div class="user_options-unregistered">
-        <h2 class="user_unregistered-title">¿No tienes cuenta?</h2>
+        <h3 class="user_unregistered-title">¿No tienes cuenta?</h3>
         <p class="user_unregistered-text">Crea una cuenta de manera gratuita haciendo click en el botón de abajo.</p>
         <button class="user_unregistered-signup" id="signup-button">Sign up</button>
       </div>
 
       <div class="user_options-registered">
-        <h2 class="user_registered-title">¿Ya tienes cuenta?</h2>
+        <h3 class="user_registered-title">¿Ya tienes cuenta?</h3>
         <p class="user_registered-text">Accede con tus credenciales haciendo click en el botón de abajo.</p>
         <button class="user_registered-login" id="login-button">Login</button>
       </div>

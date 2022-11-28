@@ -41,13 +41,16 @@ nav.navbar h1{
 }
 
 h2{
-    font-size: 3em !important;
-    font-weight: 600;
-    background-image: conic-gradient(#553c9a, #ee4b2b, #00c2cb, #553c9a);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    
+  font-size: 3em !important;
+  font-weight: 600;
+  background-image: conic-gradient(#553c9a, #ee4b2b, #00c2cb, #553c9a);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+h3{
+  color:#22252C;
 }
 
 .flex-container{
@@ -513,10 +516,29 @@ body {
 }
 
 .containerPlace {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0 50px 0;
+}
+
+.containerPlace2{
+  display:flex;
+  justify-content: center; 
+  align-items: center; 
+  border: 1px solid black;
+  margin: 50px 0 50px 0;
+}
+
+.containerPlace2 form{
+  width: 60em;
+  height: 40em;
+  padding:2em;
+  border:1px solid red;
+}
+
+.containerPlace p{
+  color:#00c2cb;
 }
 
 .art-board__container {
@@ -531,16 +553,17 @@ body {
 }
 
 .containerPlace a{
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .card {
-   width: 295px;
-   overflow: hidden;
-   border-radius: 25px;
-   border: 1px solid lavender;
-   margin: 10px;
-   box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+  width: 295px;
+  overflow: hidden;
+  border-radius: 25px;
+  border: 1px solid lavender;
+  margin: 10px;
+  box-shadow: 5px 5px 15px 5px rgba(230, 230, 250, 1);
+  padding: 0.1em;
 }
 
 .card:hover{
@@ -553,8 +576,7 @@ body {
     margin-left:5%;
     margin-top:3%;
     border-radius:50%;
-    border: 2px solid transparent;
-    border-color: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    border: 2px solid linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%) !important;
     object-fit: cover;
 }
 
@@ -572,11 +594,21 @@ body {
 }
 
 .card__info {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   padding: 0px 30px 20px 30px;
-   flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 30px 20px 30px;
+  flex-wrap: wrap;
+}
+
+.starsIcons{
+  display: flex;
+  justify-content: space-between;
+  padding: 0.01em;
+}
+
+.starsIcons i{
+  color:#22252C;
 }
 
 .card__info h3 {

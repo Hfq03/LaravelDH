@@ -6,37 +6,52 @@
         @foreach ($files as $file)
             @if($file->id == $place->file_id)
                 <a href="{{ route('places.show',$place) }}"><div class="card">
-                    <img src="/img/fotocarnet.jpg" class="profImg"/>
-                    <p>{{$place->user->name }}</p>
+                    <div style="display:flex; justify-content:left; align-items: center;">
+                        <img src="/img/fotocarnet.jpg" class="profImg"/>
+                        <h3 style="margin-top: 0.8em; text-transform: lowercase;">{{'@'.$place->user->name }}</h3>
+                    </div>
                     <div class="card__image">
                         <img src='{{ asset("storage/{$file->filepath}")}}' height="100%" width="100%" />
                     </div>
-                    <div class="car__info--title">
+                    <div class="car__info">
                         <h3>{{$place->name }}</h3>
                         <p>{{$place->description }}</p>
                     </div>
-                    <div>
+                    <div class="starsIcons">
                         @if ($place->category_id == 1)
-                            <span class="fa fa-star checked"></span>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                            </div>
                         @elseif ($place->category_id == 2)
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
                         @elseif ($place->category_id == 3)
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
                         @elseif ($place->category_id == 4)
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
                         @elseif ($place->category_id == 5)
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                            </div>
                         @endif
+                        <div>
+                            <i class="fa-regular fa-bookmark fa-lg"></i>
+                        </div>
                     </div>
                 </div></a>
             @endif
