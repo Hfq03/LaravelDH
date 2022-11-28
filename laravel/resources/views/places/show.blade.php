@@ -53,9 +53,21 @@
                     <span class="fa fa-star checked"></span>
                 </div>
             @endif
-            <div>
-                <i class="fa-regular fa-bookmark fa-lg"></i>
-            </div>
+            @if($control == true)
+                <form id="favourite" method="post" action="{{route('place.favourite',$place)}}" enctype="multipart/form-data">
+                    @csrf
+                    <div>
+                        <button type="submit"><i class="fa-solid fa-bookmark fa-lg"></i></button>
+                    </div>
+                </form>
+            @else
+                <form id="unfavourite" method="post" action="{{route('place.unfavourite',$place)}}" enctype="multipart/form-data">
+                    @csrf
+                    <div>
+                        <button type="submit"><i class="fa-regular fa-bookmark fa-lg"></i></i></button>
+                    </div>
+                </form>
+            @endif
         </div>
         <br>
         <div>

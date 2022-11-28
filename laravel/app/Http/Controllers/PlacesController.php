@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Places;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Favourite;
 use App\Models\File;
+use App\Models\Visibility;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 
 class PlacesController extends Controller
 {
@@ -116,10 +121,26 @@ class PlacesController extends Controller
     public function show(Places $place)
     {
         $file = File::find($place->file_id);
+        $user = User::find($place->author_id);
+        $visibility=Visibility::find($place->visibility_id);
+        $contFav=Favourite::where('place_id','=',$place->id)->count();
+
+        $control = false;
+        try{
+            if (Favourite::where('user_id', '=', auth()->user()->id)->where('place_id','=',$place->id)->exists()){
+                $control = true;
+            }
+        } catch (Exception $e){
+            $control = false;
+        }
+
         return view("places.show", [
             'place' => $place,
             'file' => $file,
             'author' => $place->user,
+            'visibility' => $visibility,
+            'control' => $control,
+            'favourites' => $contFav,
         ]);
     }
 
@@ -255,13 +276,11 @@ class PlacesController extends Controller
 
         $id_place = $place->id;
         $id_user = auth()->user()->id;
-        $id_favourite = "Select id FROM favourites WHERE id_place= $id_place  and id_user = $id_user";
-
+        $id_favourite = comprobar_favourite();
+        $id_favourite->delete();
+        
         return redirect()->back();
 
     }
-
-
-
 
 }
