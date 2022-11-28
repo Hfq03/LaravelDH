@@ -44,7 +44,6 @@
                     </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        @include('partials.language-switcher')
                         <!-- Authentication Links -->
                         @include('partials.language-switcher')
                         @guest
@@ -85,7 +84,7 @@
         <main>
             @yield('content')
         </main>
-        @if(str_contains(url()->current(), '/login') || str_contains(url()->current(), '/password/reset'))
+        @if(str_contains(url()->current(), '/login') || str_contains(url()->current(), '/password/reset') || str_contains(url()->current(), '/post'))
         
         @else
             @if(str_contains(url()->current(), '/dashboard'))
