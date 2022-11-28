@@ -24,7 +24,11 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
     public function author(){
-       return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
+    }
+    public function liked()
+    {
+        return $this->belongsToMany(User::class, 'likes');
     }
 
 }

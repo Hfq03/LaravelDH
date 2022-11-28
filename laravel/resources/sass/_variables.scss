@@ -81,8 +81,40 @@ h3{
     justify-content: center;   
     align-items: center;
     padding: 2em;
-    text-align: center;
+.errorHidden{
+    display: none;
+}
 
+.header {
+    padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+    margin-bottom: 0;
+    color: var(--bs-card-cap-color);
+    background-color: var(--bs-card-cap-bg);
+    border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    text-align: left;
+}
+
+.cbody{
+    flex: 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+    text-align: left;
+}
+.cont, .cont-fluid, .cont-xxl, .cont-xl, .cont-lg, .cont-md, .cont-sm {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 50%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+.derecha{
+    text-align: right;
+}
+.img{
+    width: 100%;
+    text-align: center;
 }
 
 .flex-container > div{
@@ -643,4 +675,20 @@ body {
 
 .btn, .btn-primary{
   background-color: #3f3250;
+.empty{
+    outline:none;
+}
+.text{
+    text-decoration: none;
+    color: black;
+}
+.ederecha{
+    text-align: left;
+    display:flex;
+    justify-content: space-between;
+}
+.eizquierda{
+    text-align: right;
+    display:flex;
+    justify-content: space-between;
 }

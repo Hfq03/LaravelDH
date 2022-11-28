@@ -7,22 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Likes extends Model
 {
-    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    protected $table = 'likes';
     protected $fillable = [
-        'name',
-        'file_id',
-        'author_id',
+        'user_id',
+        'post_id',
     ];
-
-    public function places(){
-        return $this->belongsTo(Places::class);
-    }
-    public function user(){
-        return $this->belongsTo(User::class, 'author_id');
-    }
-    public function author(){
-       return $this->belongsTo(User::class);
-    }
-
 }

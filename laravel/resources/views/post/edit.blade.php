@@ -12,45 +12,49 @@
                         @method('PUT')
                         <table class="table">
                             <thead>
-                                <tr>
-                                    <td scope="col">ID</td>
-                                    <td scope="col">Body</td>
-                                    <td scope="col">File</td>
-                                    <td scope="col">Latitude</td>
-                                    <td scope="col">Longitude</td>
-                                    <td scope="col">Visibility</td>
-                                    <td scope="col">Author</td>
-                                    <td scope="col">Created</td>
-                                    <td scope="col">Updated</td>
-                                </tr>
+                            <div>
+                                <td>
+                                    <p>{{ __('fields.created_at') }}: {{ $post->created_at }}</p> 
+                                </td>
+                                <td>
+                                    <p class="derecha">{{ __('fields.updated_at') }}: {{ $post->updated_at }}</p>
+                                </td>
+                            <div>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->body }}</td>
-                                    <td>{{ $post->file_id }}</td>
-                                    <td>{{ $post->latitude }}</td>
-                                    <td>{{ $post->longitude }}</td>
-                                    <td>{{ $post->visibility_id }}</td>
-                                    <td>{{ $post->author_id }}</td>
-                                    <td>{{ $post->created_at }}</td>
-                                    <td>{{ $post->updated_at }}</td>
+                                    <td colspan="2">{{ $post->user->name }}</td>
+                                </tr>
+                                <tr>
+                                    @if($file->id == $post->file_id)
+                                        <td colspan="2"><img class="img" src="{{ asset("storage/{$file->filepath}") }}" /></td>
+                                    @endif
                                 </tr>
                             </tbody>
+                            <tr>
+                                <td colspan="2">{{ $post->user->name }}:&nbsp{{ $post->body }}</td>
+                            </tr>
                         </table>
                         <div class="form-group">
-                            <label for="body">Body</label><br>
-                            <input type="text" id="body" name="body"><br>
-                            <label for="latitude">Latitude</label><br>
-                            <input type="text" id="latitude" name="latitude"><br>
-                            <label for="longitude">Longitude</label><br>
-                            <input type="text" id="longitude" name="longitude"><br>
-                            <label for="visibility_id">Visibility</label><br>
-                            <input type="text" id="visibility_id" name="visibility_id"><br>
-                            <label for="upload">Update:</label>
+                            <div class="eizquierda">
+                                <label for="body">{{ __('fields.body') }}</label>
+                                <input type="text" id="body" name="body">
+                                <label for="latitude">{{ __('fields.latitude') }}</label>
+                                <input type="text" id="latitude" name="latitude">
+                            </div>
+                            <br>
+                            <div class="ederecha">
+                                <label for="longitude">{{ __('fields.longitude') }}</label>
+                                <input type="text" id="longitude" name="longitude">
+                                <label for="visibility_id">{{ __('fields.visibility_id') }}</label>
+                                <input type="text" id="visibility_id" name="visibility_id">
+                            </div>
+                            <br>
+                            <label for="upload">{{ __('fields.update') }}:</label>
                             <input type="file" class="form-control" name="upload"/>
                             <br>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">{{ __('fields.update') }}</button>
+                            <a class="btn btn-secondary" href="{{ route('post.index') }}" role="button">{{ __('fields.back') }}</a>
                         </div> 
                     </form>
                      

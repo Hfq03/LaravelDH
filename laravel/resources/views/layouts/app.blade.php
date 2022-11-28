@@ -42,11 +42,11 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         @include('partials.language-switcher')
                         <!-- Authentication Links -->
+                        @include('partials.language-switcher')
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
