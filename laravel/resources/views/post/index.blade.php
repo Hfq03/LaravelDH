@@ -52,5 +52,6 @@
 @endforeach
 <div class="cont">
     <a class="btn btn-primary" href="{{ route('post.create') }}" role="button">{{ __('fields.añadir_archivo') }}</a>
+    <a class="btn btn-secondary" href="{{ route('dashboard') }}" role="button">{{ __('fields.back') }}</a>
 </div>
 @endsection
