@@ -16,7 +16,7 @@
 <div class="container">
    <div class="row justify-content-center">
        <div class="col-md-8">
-           <div class="card">
+           <div class="card2">
                <div class="card-header">{{ __('Post') }}</div>
                <div class="card-body">
                <form id="create" method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">

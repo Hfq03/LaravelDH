@@ -3,8 +3,8 @@
 @section('content')
 @foreach ($post as $p)
     <div class="cont">
-        <div class="card">
-            <div class="header"><i class="fa-regular fa-circle-user">&nbsp</i>{{ $p->user->name }}</div>
+        <div class="card2">
+            <div class="header2"><i class="fa-regular fa-circle-user">&nbsp</i>{{ $p->user->name }}</div>
                 <div class="cbody">
                     <table class="table">
                         <thead>

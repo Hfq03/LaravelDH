@@ -4,8 +4,8 @@
 <div class="container">
    <div class="row justify-content-center">
        <div class="col-md-8">
-           <div class="card">
-               <div class="header">{{ __('Post') }}</div>
+           <div class="card2">
+               <div class="header2">{{ __('Post') }}</div>
                <div class="cbody">
                 <form method="post" action="{{ route('post.destroy',$post) }}" enctype="multipart/form-data">
                     @csrf
