@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\NuevaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,5 +58,10 @@ Route::delete('/post/{post}/likes', [App\Http\Controllers\PostController::class,
 Route::resource('nueva', NuevaController::class)
     ->middleware(['auth']);
 
+Route::get('/aboutus', function(){
+    return view('aboutus');
+});
+
 Route::post('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'favourite'])->name('places.favourite');
 Route::delete('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'unfavourite'])->name('places.unfavourite');
+

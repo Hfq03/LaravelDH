@@ -38,70 +38,70 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-public function store(Request $request)
-    {
-        //Validar fichero
-        $validatedData = $request->validate([
-            'upload' => 'required|mimes:gif,jpeg,jpg,mp4,png|max:1024',
-            'body' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
-            'visibility_id' => 'required',
-        ]);
-
-        //Obtener datos
-        $upload = $request->file('upload');
-        $fileName = $upload->getClientOriginalName();
-        $fileSize = $upload->getSize();
-        $body = $request->get('body');
-        $latitude = $request->get('latitude');
-        $longitude = $request->get('longitude');
-        $visibility_id = $request->get('visibility_id');
-        \Log::debug("Storing file '{$fileName}' ($fileSize)...");
-
-        //Subir archivo
-        $uploadName = time() . '_' . $fileName;
-        $filePath = $upload->storeAs(
-            'uploads',
-            $uploadName,
-            'public'
-        );
-
-        if (\Storage::disk('public')->exists($filePath)){
-            \Log::debug("Local storage OK");
-            $fullPath = \Storage::disk('public')->path($filePath);
-            \Log::debug("File saved at {$fullPath}");
-        
-
-            //Guardar datos en la BD
-
-            $file = File::create([
-                'filepath' => $filePath,
-                'filesize' => $fileSize,
+    public function store(Request $request)
+        {
+            //Validar fichero
+            $validatedData = $request->validate([
+                'upload' => 'required|mimes:gif,jpeg,jpg,mp4,png|max:1024',
+                'body' => 'required',
+                'latitude' => 'required',
+                'longitude' => 'required',
+                'visibility_id' => 'required',
             ]);
 
-            $post = Post::create([
-                'body' => $body,
-                'file_id' => $file->id,
-                'latitude' => $latitude,
-                'longitude' => $longitude,
-                'visibility_id' => $visibility_id,
-                'author_id' => auth()->user()->id,
-            ]);
+            //Obtener datos
+            $upload = $request->file('upload');
+            $fileName = $upload->getClientOriginalName();
+            $fileSize = $upload->getSize();
+            $body = $request->get('body');
+            $latitude = $request->get('latitude');
+            $longitude = $request->get('longitude');
+            $visibility_id = $request->get('visibility_id');
+            \Log::debug("Storing file '{$fileName}' ($fileSize)...");
 
-            \Log::debug("DB storage OK");
+            //Subir archivo
+            $uploadName = time() . '_' . $fileName;
+            $filePath = $upload->storeAs(
+                'uploads',
+                $uploadName,
+                'public'
+            );
 
-            return redirect()->route('post.show', $post)
-                ->with('success', __('File successfully saved'));
+            if (\Storage::disk('public')->exists($filePath)){
+                \Log::debug("Local storage OK");
+                $fullPath = \Storage::disk('public')->path($filePath);
+                \Log::debug("File saved at {$fullPath}");
+            
 
-        } else {
-            \Log::debug("Local storage FAILS");
+                //Guardar datos en la BD
 
-            return redirect()->route("post.create")
-                ->with('error', __('ERROR uploading file'));
+                $file = File::create([
+                    'filepath' => $filePath,
+                    'filesize' => $fileSize,
+                ]);
+
+                $post = Post::create([
+                    'body' => $body,
+                    'file_id' => $file->id,
+                    'latitude' => $latitude,
+                    'longitude' => $longitude,
+                    'visibility_id' => $visibility_id,
+                    'author_id' => auth()->user()->id,
+                ]);
+
+                \Log::debug("DB storage OK");
+
+                return redirect()->route('post.show', $post)
+                    ->with('success', __('File successfully saved'));
+
+            } else {
+                \Log::debug("Local storage FAILS");
+
+                return redirect()->route("post.create")
+                    ->with('error', __('ERROR uploading file'));
+            }
+
         }
-
-    }
 
     /**
      * Display the specified resource.
