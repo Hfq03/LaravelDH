@@ -101,9 +101,19 @@ class PostTest extends TestCase
         $name  = "avatar.png";
         $size = 5000; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
+        $body = 'efefwfew';
+        $latitude = 1;
+        $longitude = 2;
+        $visibility_id = 3;
+        $author_id = 1;
         // Upload fake file using API web service
         $response = $this->postJson("/api/post", [
             "upload" => $upload,
+            "body" => $body,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "visibility_id" => $visibility_id,
+            "author_id" => $author_id,
         ]);
         // Check ERROR response
         $this->_test_error($response);
