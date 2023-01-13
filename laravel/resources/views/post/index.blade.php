@@ -26,17 +26,44 @@
                                 @endforeach
                             </tr>
                             <tr>
+                                 
                                 <td colspan="2">
-                                    <form method="post" action="{{ route('post.index') }}" enctype="multipart/form-data">
+                                    @if($p->comprobarlike())                       
+                                        <form action="{{ route('post.likes',$p) }}" method="post" enctype="multipart/form-data" style="display: inline-block;">
                                         @csrf
-                                        @method('likes')
-                                        <i class="fa-regular fa-heart fa-2x"></i>
-                                        &nbsp
-                                        <i class="fa-regular fa-comment fa-2x"></i>
-                                        @if(auth()->user()->id == $p->author_id)
-                                            <a class="text" href="{{ route('post.show',$p) }}"><i class="fa-solid fa-gear fa-2x"></i></i></a>
-                                        @endif
-                                    </form>
+                                            <p>
+                                                {{$p->contadorlike()}}
+                                                <button><i class="fa-regular fa-heart fa-2x"></i></button>
+                                                <form method="post" action="{{ route('post.index') }}" enctype="multipart/form-data">
+                                                    @csrf
+                                                    &nbsp
+                                                    <i class="fa-regular fa-comment fa-2x"></i>
+                                                    @if(auth()->user()->id == $p->author_id)
+                                                        <a class="text" href="{{ route('post.show',$p) }}"><i class="fa-solid fa-gear fa-2x"></i></i></a>
+                                                    @endif
+                                                </form>    
+                                            </p>                     
+                                        </form>
+                                    
+                                    @else
+                                        <form action="{{ route('post.unlikes',$p) }}" method="post" enctype="multipart/form-data"style="display: inline-block;">
+                                        @csrf 
+                                        @method('DELETE')
+                                        <p>
+                                            {{$p->contadorlike()}}
+                                            <button><i class="fa-sharp fa-solid fa-heart fa-2x"></i></i></button>  
+                                            <form method="post" action="{{ route('post.index') }}" enctype="multipart/form-data">
+                                                @csrf
+                                                &nbsp
+                                                <i class="fa-regular fa-comment fa-2x"></i>
+                                                @if(auth()->user()->id == $p->author_id)
+                                                    <a class="text" href="{{ route('post.show',$p) }}"><i class="fa-solid fa-gear fa-2x"></i></i></a>
+                                                @endif
+                                            </form>      
+                                        </p>        
+                                        </form>
+                                    @endif
+                    
                                 </td>
                             </tr>
                         </tbody>

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Likes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -235,5 +239,20 @@ class PostController extends Controller
             return redirect()->route("post.index")
                 ->with('success', __('Place Successfully Deleted'));
         }
+    }
+
+    public function likes(Post $post)
+    {
+        $like =Likes::create ([
+            'user_id' => auth()->user()->id,
+            'post_id' => $post->id,
+        ]);
+        return redirect()->back();
+    }
+
+    public function unlikes(Post $post)
+    {
+        DB::table('likes')->where(['user_id'=>Auth::id(),'post_id'=>$post->id])->delete();
+        return redirect()->back();
     }
 }

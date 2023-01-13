@@ -66,8 +66,8 @@ class FileTest extends TestCase
    /**
     * @depends test_file_create
     */
-   public function test_file_read(object $file)
-   {
+    public function test_file_read(object $file)
+    {
        // Read one file
        $response = $this->getJson("/api/files/{$file->id}");
        // Check OK response
@@ -76,7 +76,7 @@ class FileTest extends TestCase
        $response->assertJsonPath("data.filepath",
            fn ($filepath) => !empty($filepath)
        );
-   }
+    }
   
    public function test_file_read_notfound()
    {

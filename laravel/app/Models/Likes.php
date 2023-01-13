@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Likes extends Model
 {
     use HasFactory;
-    protected $table = 'likes';
+    //protected $table = 'likes';
+    public $timestamps = false;
     protected $fillable = [
         'user_id',
         'post_id',

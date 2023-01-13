@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\PostController;
-
+use App\Http\Controllers\Api\PlacesController;
+use App\Http\Controllers\Api\Favorite;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,7 +27,16 @@ Route::post('register', [TokenController::class, 'register']);
 
 Route::apiResource('files', FileController::class);
 
-Route::apiResource('post', PostController::class);  
+Route::apiResource('post', PostController::class);
 
+Route::apiResource('places', PlacesController::class);
+
+Route::post('/post/{post}/likes',[PostController::class, 'likes']);
+
+Route::delete('/post/{post}/likes',[PostController::class, 'unlikes']);
+
+Route::post('/places/{place}/favorites', [PlacesController::class,'favorite']);
+
+Route::delete('/places/{place}/favorites', [PlacesController::class,'unfavorite']);
 
 

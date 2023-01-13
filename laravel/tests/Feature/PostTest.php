@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Mymodel;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Testing\Fluent\AssertableJson;
+use App\Models\Likes;
 
 class PostTest extends TestCase
 {
@@ -122,15 +123,15 @@ class PostTest extends TestCase
     /**
         * @depends test_post_create
         */
-    public function test_post_read(object $file)
+    public function test_post_read(object $post)
     {
         // Read one file
-        $response = $this->getJson("/api/post/{$file->id}");
+        $response = $this->getJson("/api/post/{$post->id}");
         // Check OK response
         $this->_test_ok($response);
         // Check JSON exact values
-        $response->assertJsonPath("data.filepath",
-            fn ($filepath) => !empty($filepath)
+        $response->assertJsonPath("data.id",
+            fn ($id) => !empty($id)
         );
     }
 
@@ -144,40 +145,61 @@ class PostTest extends TestCase
     /**
         * @depends test_post_create
         */
-    public function test_post_update(object $file)
+    public function test_post_update(object $post)
     {
         // Create fake file
-        $name  = "photo.jpg";
+        $name  = "avatar.png";
         $size = 1000; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
+        $body = 'efefwfew';
+        $latitude = 1;
+        $longitude = 2;
+        $visibility_id = 3;
+        $author_id = 1;
         // Upload fake file using API web service
-        $response = $this->putJson("/api/post/{$file->id}", [
+        $response = $this->putJson("/api/post/{$post->id}", [
             "upload" => $upload,
+            "body" => $body,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "visibility_id" => $visibility_id,
+            "author_id" => $author_id,
         ]);
         // Check OK response
         $this->_test_ok($response);
         // Check validation errors
-        $response->assertValid(["upload"]);
-        // Check JSON exact values
-        $response->assertJsonPath("data.filesize", $size*1024);
-        // Check JSON dynamic values
-        $response->assertJsonPath("data.filepath",
-            fn ($filepath) => str_contains($filepath, $name)
-        );
+        $response->assertValid([
+            "upload",
+            "body",
+            "latitude",
+            "longitude",
+            "visibility_id",
+            "author_id",
+        ]);
     }
 
     /**
         * @depends test_post_create
         */
-    public function test_post_update_error(object $file)
+    public function test_post_update_error(object $post)
     {
         // Create fake file with invalid max size
         $name  = "photo.jpg";
         $size = 3000; /*KB*/
         $upload = UploadedFile::fake()->image($name)->size($size);
+        $body = 'efefwfew';
+        $latitude = 1;
+        $longitude = 2;
+        $visibility_id = 3;
+        $author_id = 1;
         // Upload fake file using API web service
-        $response = $this->putJson("/api/post/{$file->id}", [
+        $response = $this->putJson("/api/post/{$post->id}", [
             "upload" => $upload,
+            "body" => $body,
+            "latitude" => $latitude,
+            "longitude" => $longitude,
+            "visibility_id" => $visibility_id,
+            "author_id" => $author_id,
         ]);
         // Check ERROR response
         $this->_test_error($response);
@@ -191,12 +213,35 @@ class PostTest extends TestCase
     }
 
     /**
+     * @depends test_post_create
+     */
+    public function test_post_likes(object $post)
+    {
+        Sanctum::actingAs(self::$testUser);
+        // Delete one file using API web service
+        $response = $this->postJson("/api/post/{$post->id}/likes");
+        // Check OK response
+        $this->_test_ok($response);
+    }
+    /**
+     * @depends test_post_create
+     */
+    public function test_post_unlikes(object $post)
+    {
+        Sanctum::actingAs(self::$testUser);
+        // Delete one file using API web service
+        $response = $this->deleteJson("/api/post/{$post->id}/likes");
+        // Check OK response
+        $this->_test_ok($response);
+    }
+
+    /**
         * @depends test_post_create
         */
-    public function test_post_delete(object $file)
+    public function test_post_delete(object $post)
     {
         // Delete one file using API web service
-        $response = $this->deleteJson("/api/post/{$file->id}");
+        $response = $this->deleteJson("/api/post/{$post->id}");
         // Check OK response
         $this->_test_ok($response);
     }
