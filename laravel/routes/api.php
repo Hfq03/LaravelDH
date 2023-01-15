@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PlacesController;
 use App\Http\Controllers\Api\Favorite;
+use App\Http\Controllers\Api\Review;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,4 +41,5 @@ Route::post('/places/{place}/favorites', [PlacesController::class,'favorite']);
 
 Route::delete('/places/{place}/favorites', [PlacesController::class,'unfavorite']);
 
+Route::apiResource('places.review', PlacesController::class);
 

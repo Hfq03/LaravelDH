@@ -21,7 +21,10 @@
                <div class="card-body">
                <form id="create" method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @vite('resources/js/post/create.js')
+                    @env(['local','development'])
+                        @vite('resources/js/post/create.js')
+                    @endenv
+                    <!-- @vite('resources/js/post/create.js') -->
                     
                     <div id="body">
                         <label for="body">{{ __('fields.body') }}</label><br>

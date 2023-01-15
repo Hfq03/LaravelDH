@@ -32,7 +32,10 @@
                 <div class="card-body">
                 <form id="create" method="post" action="{{ route('files.store') }}" enctype="multipart/form-data">
                     @csrf
-                    @vite('resources/js/files/create.js')
+                    @env(['local','development'])
+                        @vite('resources/js/files/create.js')
+                    @endenv
+                    <!-- @vite('resources/js/files/create.js') -->
                     <div class="form-group">
                         <input type="file" class="form-control" name="upload"/>
                     </div>

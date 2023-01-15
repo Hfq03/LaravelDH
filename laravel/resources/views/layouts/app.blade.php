@@ -17,8 +17,20 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles and scripts -->
+    @env(['local','development'])
+        @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
+    @endenv
+    @env(['production'])
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+        @endphp
+        <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+        <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
+    @endenv
+
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/ee69a94543.js" crossorigin="anonymous"></script>
@@ -93,6 +105,7 @@
                     <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
                     <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
                     <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x"></i></a></div>
                     <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                     <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
                 </div>
@@ -102,6 +115,7 @@
                     <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
                     <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
                     <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x"></i></a></div>
                     <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                     <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
                 </div>
@@ -111,6 +125,7 @@
                     <div style="background-color: #22252C"><i class="fa-solid fa-heart fa-3x" style="color: #e14658;"></i></div>
                     <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
                     <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x"></i></a></div>
                     <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                     <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
                 </div>
@@ -120,6 +135,7 @@
                     <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></a></div>
                     <div style="background-color: #22252C;"><i class="fa-solid fa-square-plus fa-3x" style="color: white;"></i></div>
                     <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                    <div><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x"></i></a></div>
                     <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                     <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
                 </div>
@@ -129,9 +145,18 @@
                 <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></i></div>
                 <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
                 <div style="background-color: #22252C;"><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x" style="color: white;"></i></a></div>
+                <div><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x"></i></a></div>
                 <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
                 <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
             </div>
+            @elseif (str_contains(url()->current(), '/review'))
+                <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></a></i></div>
+                <div><a href="{{ url('/likes') }}"><i class="fa-solid fa-heart fa-3x"></i></i></div>
+                <div><a href="{{ url('/nueva') }}"><i class="fa-solid fa-square-plus fa-3x"></i></a></div>
+                <div><a href="{{ url('/places') }}"><i class="fa-solid fa-location-dot fa-3x"></i></a></div>
+                <div style="background-color: #22252C;"><a href="{{ url('/review') }}"><i class="fa-solid fa-book-open fa-3x" style="color: white;"></i></a></div>
+                <div><a href="{{ url('/files') }}"><i class="fa-solid fa-file fa-3x"></i></a></div>
+                <div><i class="fa-solid fa-circle-user fa-3x"></i></div>
             @elseif (str_contains(url()->current(), '/files'))
                 <div class="flex-container">
                     <div><a href="{{ url('/post') }}"><i class="fa-solid fa-house fa-3x"></i></a></div>
