@@ -22,7 +22,7 @@ class ReviewsController extends Controller
     public function index()
     {
         return view("review.index", [
-            "reviews" => Review::all(),
+            "review" => Review::all(),
             "files" => File::all()
         ]); 
     }
@@ -34,7 +34,7 @@ class ReviewsController extends Controller
      */
     public function create()
     {
-        return view("reviews.create");
+        return view("review.create");
     }
 
    /**

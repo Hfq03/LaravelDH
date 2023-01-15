@@ -66,7 +66,7 @@ Route::get('/aboutus', function(){
 });
 
 Route::resource('places.review', ReviewController::class) ->middleware(['auth']);  
-// Route::post('store', 'ReviewController@store')->name("review.store");
+Route::post('store', 'ReviewController@store')->name("review.store");
 
 
 Route::post('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'favourite'])->name('places.favourite');
