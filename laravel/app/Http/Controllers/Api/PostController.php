@@ -76,7 +76,7 @@ class PostController extends Controller
                 'filesize' => $fileSize,
             ]);
 
-            $post = Post::create([
+            $post = Post::create([  
                 'body' => $body,
                 'file_id' => $file->id,
                 'latitude' => $latitude,

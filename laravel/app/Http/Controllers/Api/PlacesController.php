@@ -273,39 +273,13 @@ class PlacesController extends Controller
         $place =  Places::find($id);
         if($place){
         
-            if(auth()->user()->id == $place->author_id){
-
-                $file=File::find($place->file_id);
-
-                \Storage::disk('public')->delete($place -> id);
-                $place->delete();
-
-                \Storage::disk('public')->delete($file -> filepath);
-                $file->delete();
-                if (\Storage::disk('public')->exists($place->id)) {
-                    \Log::debug("Local storage OK");
-                    // Patró PRG amb missatge d'error
-                    return response()->json([
-                        'success'  => false,
-                        'message' => 'Error deleting place'
-                    ], 500);
-                }
-                else{
-                    \Log::debug(" Places Delete");
-                    // Patró PRG amb missatge d'èxit
-                    return response()->json([
-                        'success' => true,
-                        'data'    => $place
-                    ], 200);
-                } 
-                
-            }
-            else{
-                return response()->json([
-                    'success'  => false,
-                    'message' => 'Error deleting place, its not yours'
-                ], 500);
-            }
+            $place->delete();
+            \Log::debug(" Places Delete");
+            // Patró PRG amb missatge d'èxit
+            return response()->json([
+                'success' => true,
+                'data'    => $place
+            ], 200);
         }
         else{
             return response()->json([
@@ -315,6 +289,11 @@ class PlacesController extends Controller
 
         } 
 
+    }
+
+    public function update_workaround(Request $request, $id)
+    {
+        return $this->update($request, $id);
     }
 
 }
