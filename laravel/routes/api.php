@@ -38,8 +38,9 @@ Route::post('/post/{post}/likes',[PostController::class, 'likes']);
 Route::delete('/post/{post}/likes',[PostController::class, 'unlikes']);
 
 Route::post('/places/{place}/favorites', [PlacesController::class,'favorite']);
-
 Route::delete('/places/{place}/favorites', [PlacesController::class,'unfavorite']);
 
-Route::apiResource('places.reviews', ReviewController::class);
-
+// Route::apiResource('places.reviews', ReviewController::class);
+Route::post('/places/{place}/reviews', [ReviewController::class,'store']);
+Route::delete('/places/{place}/reviews/{review}', [ReviewController::class,'destroy']);
+Route::get('/places/{place}/reviews', [ReviewController::class,'index']);

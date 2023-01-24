@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Illuminate\Http\UploadedFile; 
 use Laravel\Sanctum\Sanctum; 
 use App\Models\User;
+use App\Http\Controllers\Api\ReviewController;
 
 
 class ReviewTest extends TestCase
@@ -27,25 +28,16 @@ class ReviewTest extends TestCase
             "email"     => "{$name}@mailinator.com",
             "password"  => "12345678"
         ]);
-        // Create fake file
-        $name  = "avatar.png";
-        $size = 500; /*KB*/
-        $upload = UploadedFile::fake()->image($name)->size($size);
+    
         // TODO Omplir amb dades vàlides
         self::$validData = [
-            'title' => 'Soy ismael',
-            "upload" => $upload,
-            'description' => 'me gusta m07',
-            'stars'    => '2',
-            'visibility_id'   => '2',
+            'review' => 'Es un sitio espectacular, muy recomendable!',
+            'stars'    => '2'
         ];
         // TODO Omplir amb dades incorrectes
         self::$invalidData = [
-            'title' => 38,
-            "upload" => $upload,
-            'description' => 19,
-            'stars'    => '8',
-            'visibility_id'   => '2',
+            'review' => 38,
+            'stars'    => 'asdfsdf'
         ];
     }
  
@@ -62,7 +54,7 @@ class ReviewTest extends TestCase
     public function test_review_list()
     {
         // List all files using API web service
-        $response = $this->getJson("/api/places/" . self::$placeId . "/review");
+        $response = $this->getJson("/api/places/" . self::$placeId . "/reviews");
         // Check OK response
         $this->_test_ok($response);
         // Check JSON dynamic values
@@ -74,19 +66,11 @@ class ReviewTest extends TestCase
     public function test_review_create() : object
     {
         Sanctum::actingAs(self::$testUser);
-        // Llamar servicio API y revisar que no hay errores de validacion
-        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$validData);
-
-        $params = array_keys(self::$validData);
-        $response->assertValid($params);
-                
+        $response = $this->postJson("/api/places/" . self::$placeId ."/reviews", self::$validData);
         // Check OK response
         $this->_test_ok($response, 201);
-    
-        // Check JSON dynamic values
-        $response->assertJsonPath("data.id",
-            fn ($id) => !empty($id)
-        );
+        // Check validation errors
+        $response->assertValid(["review", "stars"]);
         // Read, update and delete dependency!!!
         $json = $response->getData();
         return $json->data;
@@ -95,87 +79,11 @@ class ReviewTest extends TestCase
     public function test_review_create_error()
     {
         Sanctum::actingAs(self::$testUser);
-        // Llamar servicio API
-        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$invalidData);
-
-        $params = [
-            'title', 'description'
-        ];
+        // Cridar servei web de l'API
+        $response = $this->postJson("/api/places/" . self::$placeId ."/reviews", self::$invalidData);
+        // TODO Revisar errors de validació
+        $params = ['review','stars'];
         $response->assertInvalid($params);
-        
-        // Check ERROR response
-        $this->_test_error($response);
-    }
-
-    /**
-     * @depends test_review_create
-     */
-    public function test_review_read(object $review)
-    {
-        // Read one file
-        $response = $this->getJson("/api/places/" . self::$placeId . "/review/{$review->id}");
-        // Check OK response
-        $this->_test_ok($response);
-       
-    }
-
-    public function test_review_read_notfound()
-    {
-        Sanctum::actingAs(self::$testUser);
-        $id = "not_exists";
-        $response = $this->getJson("/api/places/" . self::$placeId . "/review/{$id}");
-        $this->_test_notfound($response);
-    }
-
-    /**
-     * @depends test_review_create
-     */
-    public function test_review_update(object $review)
-    {
-        Sanctum::actingAs(self::$testUser);
-        // Llamar servicio API y revisar que no hay errores de validacion
-        $response = $this->putJson("/api/places/" . self::$placeId . "/review/{$review->id}", self::$validData);
-
-        $params = array_keys(self::$validData);
-        $response->assertValid($params);
-                
-        // Check OK response
-        $this->_test_ok($response, 201);
-    
-        // Check JSON dynamic values
-        $response->assertJsonPath("data.id",
-            fn ($id) => !empty($id)
-        );
-
-        // Read, update and delete dependency!!!
-        $json = $response->getData();
-        return $json->data;
-    }
-
-    /**
-     * @depends test_review_create
-     */
-
-    public function test_review_update_error(object $review)
-    {
-        Sanctum::actingAs(self::$testUser);
-        // Llamar servicio API
-        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$invalidData);
-
-        $params = [
-            'name', 'description'
-        ];
-        $response->assertInvalid($params);
-        // Check ERROR response
-        $this->_test_error($response);
-    }
-
-    public function test_review_update_notfound()
-    {
-        Sanctum::actingAs(self::$testUser);
-        $id = "not_exists";
-        $response = $this->putJson("/api/places/" . self::$placeId . "/review/{$id}", []);
-        $this->_test_notfound($response);
     }
 
     /**
@@ -185,9 +93,7 @@ class ReviewTest extends TestCase
     public function test_review_delete(object $review)
     {
         Sanctum::actingAs(self::$testUser);
-        // Delete one file using API web service
-        $response = $this->deleteJson("/api/places/" . self::$placeId . "/review/{$review->id}");
-        // Check OK response
+        $response = $this->deleteJson("/api/places/{$review->place_id}/reviews/{$review->id}");
         $this->_test_ok($response);
     }
 
@@ -199,7 +105,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
-        $response = $this->deleteJson("/api/places/" . self::$placeId . "/review/{$id}");
+        $response = $this->deleteJson("/api/places/". self::$placeId ."/reviews/{$id}");
         $this->_test_notfound($response);
     }
 

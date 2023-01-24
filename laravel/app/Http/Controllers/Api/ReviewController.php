@@ -12,130 +12,59 @@ class ReviewController extends Controller
 {
     public function index(Places $place)
     {
+        // return response()->json([
+        //     'success' => true,
+        //     'data'    => Review::all()->where('place_id', $place->id),
+        // ], 200);
+        $review =  Review::all()->where('place_id', $place->id);
         return response()->json([
             'success' => true,
-            'data'    => Review::where('place_id', $place->id)->get(),
+            'data' => $review,
         ], 200);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
+        $place =  Places::find($id);
+
         //Validar fichero
         $validatedData = $request->validate([
-            'upload' => 'required|mimes:gif,jpeg,jpg,mp4,png|max:1024',
-            'title' => 'required',
-            'description' => 'required',
-            'stars' => 'required',
-            'visibility_id' => 'required',
+            'review' => 'required|string',
+            'stars' => 'required|integer',
         ]);
 
-        //Obtener datos
-        $upload = $request->file('upload');
-        $fileName = $upload->getClientOriginalName();
-        $fileSize = $upload->getSize();
-        $title = $request->get('title');
-        $description = $request->get('description');
-        $stars = $request->get('stars');
-        $visibility_id = $request->get('visibility_id');
-        \Log::debug("Storing review '{$fileName}' ($fileSize)...");
+        $review = Review::create([
+            'user_id' => auth()->user()->id,
+            'place_id' => $place->id,
+            'review' => $request->input('review'),
+            'stars' => $request->input('stars')
+        ]);
 
-        //Subir archivo
-        $uploadName = time() . '_' . $fileName;
-        $filePath = $upload->storeAs(
-            'uploads',
-            $uploadName,
-            'public'
-        );
+        \Log::debug("DB storage OK");
 
-        if (\Storage::disk('public')->exists($filePath)){
-            \Log::debug("Local storage OK");
-            $fullPath = \Storage::disk('public')->path($filePath);
-            \Log::debug("File saved at {$fullPath}");
+        return response()->json([
+            'success' => true,
+            'data'    => $review
+        ], 201);
+
         
 
-            //Guardar datos en la BD
-            $file = File::create([
-                'filepath' => $filePath,
-                'filesize' => $fileSize,
-            ]);
-
-            $review = Review::create([
-                'title' => $title,
-                'description' => $description,
-                'file_id' => $file->id,
-                'stars' => $stars,
-                'visibility_id' => $visibility_id,
-                'author_id' => auth()->user()->id,
-            ]);
-
-            \Log::debug("DB storage OK");
-
-            return response()->json([
-                'success' => true,
-                'data'    => $review
-            ], 201);
-
-        } else {
-            \Log::debug("Local storage FAILS");
-
-            return response()->json([
-                'success'  => false,
-                'message' => 'Error storing review'
-            ], 500);
-        }
-
     }
 
-    public function show($id)
+    public function destroy($id, $idR)
     {
-        $review =  Review::find($id);
-        if($review == null){
-            return response()->json([
-                'success' => false,
-                'message'    => 'Error review not found'
-            ], 404);
-        }
-        else{
-            return response()->json([
-                'success'  => true,
-                'data' => $review
-            ], 200);
-        }
-    }
-
-    public function destroy($id)
-    {
-        $review =  Review::find($id);
+        $place =  Places::find($id);
+        $review =  Review::find($idR);
         if($review){
-        
-            if(auth()->user()->id == $review->author_id){
-
-                $file=File::find($review->file_id);
-
-                \Storage::disk('public')->delete($review -> id);
+            if(auth()->user()->id == $review->user_id){
                 $review->delete();
-
-                \Storage::disk('public')->delete($file -> filepath);
-                $file->delete();
-                if (\Storage::disk('public')->exists($review->id)) {
-                    \Log::debug("Local storage OK");
-                    // Patró PRG amb missatge d'error
-                    return response()->json([
-                        'success'  => false,
-                        'message' => 'Error deleting review'
-                    ], 500);
-                }
-                else{
-                    \Log::debug(" Review Delete");
-                    // Patró PRG amb missatge d'èxit
-                    return response()->json([
-                        'success' => true,
-                        'data'    => $review
-                    ], 200);
-                } 
                 
-            }
-            else{
+                return response()->json([
+                    'success' => true,
+                    'data'    => $review
+                ], 200); 
+            
+            } else{
                 return response()->json([
                     'success'  => false,
                     'message' => 'Error deleting review, its not yours'
