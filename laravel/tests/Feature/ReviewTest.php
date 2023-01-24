@@ -15,6 +15,7 @@ class ReviewTest extends TestCase
     public static User $testUser;
     public static array $validData = [];
     public static array $invalidData = [];
+    public static int $placeId = 24;
 
     public static function setUpBeforeClass() : void
     {
@@ -61,7 +62,7 @@ class ReviewTest extends TestCase
     public function test_review_list()
     {
         // List all files using API web service
-        $response = $this->getJson("/api/review");
+        $response = $this->getJson("/api/places/" . self::$placeId . "/review");
         // Check OK response
         $this->_test_ok($response);
         // Check JSON dynamic values
@@ -74,7 +75,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         // Llamar servicio API y revisar que no hay errores de validacion
-        $response = $this->postJson("/api/review", self::$validData);
+        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$validData);
 
         $params = array_keys(self::$validData);
         $response->assertValid($params);
@@ -95,10 +96,10 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         // Llamar servicio API
-        $response = $this->postJson("/api/review", self::$invalidData);
+        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$invalidData);
 
         $params = [
-            'name', 'description'
+            'title', 'description'
         ];
         $response->assertInvalid($params);
         
@@ -112,7 +113,7 @@ class ReviewTest extends TestCase
     public function test_review_read(object $review)
     {
         // Read one file
-        $response = $this->getJson("/api/review/{$review->id}");
+        $response = $this->getJson("/api/places/" . self::$placeId . "/review/{$review->id}");
         // Check OK response
         $this->_test_ok($response);
        
@@ -122,7 +123,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
-        $response = $this->getJson("/api/review/{$id}");
+        $response = $this->getJson("/api/places/" . self::$placeId . "/review/{$id}");
         $this->_test_notfound($response);
     }
 
@@ -133,7 +134,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         // Llamar servicio API y revisar que no hay errores de validacion
-        $response = $this->putJson("/api/review/{$review->id}", self::$validData);
+        $response = $this->putJson("/api/places/" . self::$placeId . "/review/{$review->id}", self::$validData);
 
         $params = array_keys(self::$validData);
         $response->assertValid($params);
@@ -159,7 +160,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         // Llamar servicio API
-        $response = $this->postJson("/api/review", self::$invalidData);
+        $response = $this->postJson("/api/places/" . self::$placeId . "/review", self::$invalidData);
 
         $params = [
             'name', 'description'
@@ -173,31 +174,8 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
-        $response = $this->putJson("/api/review/{$id}", []);
+        $response = $this->putJson("/api/places/" . self::$placeId . "/review/{$id}", []);
         $this->_test_notfound($response);
-    }
-
-    /**
-    * @depends test_review_create
-    */
-    public function  test_review_favorite(object $review)
-    {
-        Sanctum::actingAs(self::$testUser);
-        // Delete one file using API web service
-        $response = $this->postJson("/api/review/{$review->id}/favorites");
-        // Check OK response
-        $this->_test_ok($response);
-    }
-    /**
-    * @depends test_review_create
-    */
-    public function test_review_unfavorite(object $review)
-    {
-        Sanctum::actingAs(self::$testUser);
-        // Delete one file using API web service
-        $response = $this->deleteJson("/api/review/{$review->id}/favorites");
-        // Check OK response
-        $this->_test_ok($response);
     }
 
     /**
@@ -208,7 +186,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         // Delete one file using API web service
-        $response = $this->deleteJson("/api/review/{$review->id}");
+        $response = $this->deleteJson("/api/places/" . self::$placeId . "/review/{$review->id}");
         // Check OK response
         $this->_test_ok($response);
     }
@@ -221,7 +199,7 @@ class ReviewTest extends TestCase
     {
         Sanctum::actingAs(self::$testUser);
         $id = "not_exists";
-        $response = $this->deleteJson("/api/review/{$id}");
+        $response = $this->deleteJson("/api/places/" . self::$placeId . "/review/{$id}");
         $this->_test_notfound($response);
     }
 

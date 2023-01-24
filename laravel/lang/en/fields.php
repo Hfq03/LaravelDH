@@ -28,5 +28,7 @@ return [
    'Login' => 'Login',
    'Register' => 'Register',
    'Reset Password' => 'Reset Password',
-   'Send Password Reset Link' => 'Send Password Reset Link'
+   'Send Password Reset Link' => 'Send Password Reset Link',
+   'review' => 'Tell us more about your experience',
+   'stars' => 'Rating (1-5)'
 ];

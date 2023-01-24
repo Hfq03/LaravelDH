@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlacesController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\NuevaController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,10 +65,10 @@ Route::resource('nueva', NuevaController::class)
 Route::get('/aboutus', function(){
     return view('aboutus');
 });
-
-Route::resource('places.review', ReviewController::class) ->middleware(['auth']);  
-Route::post('store', 'ReviewController@store')->name("review.store");
-
+Route::get('/places/{place}/reviews/', [App\Http\Controllers\ReviewController::class, 'index'])->middleware(['auth'])->name('reviews.index');
+Route::post('/places/{place}/reviews', [App\Http\Controllers\ReviewController::class, 'store'])->middleware(['auth'])->name('reviews.store');
+Route::get('/places/{place}/reviews/create', [App\Http\Controllers\ReviewController::class, 'create'])->middleware(['auth'])->name('reviews.create');
+Route::delete('/places/{place}/reviews/{review}', [App\Http\Controllers\ReviewController::class, 'destroy'])->middleware(['auth'])->name('reviews.delete');
 
 Route::post('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'favourite'])->name('places.favourite');
 Route::delete('/places/{place}/favourites', [App\Http\Controllers\PlacesController::class, 'unfavourite'])->name('places.unfavourite');

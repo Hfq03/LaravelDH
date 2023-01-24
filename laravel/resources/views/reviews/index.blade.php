@@ -2,60 +2,56 @@
  
 @section('content')
 <div class="containerPlace">
-    @foreach ($review as $rev)
-        @foreach ($files as $file)
-            @if($file->id == $rev->file_id)
-                <a href="{{ route('review.show',$rev) }}"><div class="card">
-                    <div style="display:flex; justify-content:left; align-items: center;">
-                        <img src="/img/fotocarnet.jpg" class="profImg"/>
-                        <h3 style="margin-top: 0.8em; text-transform: lowercase;">{{'@'.$rev->user->name }}</h3>
+    @foreach ($reviews as $review)
+        <div class="card">
+            <div style="display:flex; justify-content:left; align-items: center;">
+                <img src="/img/fotocarnet.jpg" class="profImg"/>
+                <h3 style="margin-top: 0.8em; text-transform: lowercase;">{{'@'.$review->user()->name }}</h3>
+            </div>
+            <div class="car__info">
+                <p style="color:black; font-size:1.3em;">{{$review->review }}</p>
+            </div>
+            <div class="starsIcons">
+                @if ($review->stars == 1)
+                    <div>
+                        <span class="fa fa-star checked"></span>
                     </div>
-                    <div class="card__image">
-                        <img src='{{ asset("storage/{$file->filepath}")}}' height="100%" width="100%" />
+                @elseif ($review->stars == 2)
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                     </div>
-                    <div class="car__info">
-                        <h3>{{$rev->title }}</h3>
-                        <p>{{$rev->description }}</p>
+                @elseif ($review->stars == 3)
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                     </div>
-                    <div class="starsIcons">
-                        @if ($rev->stars == 1)
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                            </div>
-                        @elseif ($rev->stars == 2)
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </div>
-                        @elseif ($rev->stars == 3)
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </div>
-                        @elseif ($rev->stars == 4)
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </div>
-                        @elseif ($rev->stars == 5)
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </div>
-                        @endif
-                        <div>
-                            <i class="fa-regular fa-bookmark fa-lg"></i>
-                        </div>
+                @elseif ($review->stars == 4)
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
                     </div>
-                </div></a>
-            @endif
-        @endforeach
+                @elseif ($review->stars == 5)
+                    <div>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                    </div>
+                @endif
+                <div>
+                    <form method="post" action="{{ route('reviews.delete',[$place, $review]) }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     @endforeach    
 </div>
 

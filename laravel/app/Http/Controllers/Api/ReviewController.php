@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\File;
+use App\Models\Places;
 
 class ReviewController extends Controller
 {
-    public function index()
+    public function index(Places $place)
     {
         return response()->json([
             'success' => true,
-            'data'    => Review::all(),
+            'data'    => Review::where('place_id', $place->id)->get(),
         ], 200);
     }
 

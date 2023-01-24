@@ -28,5 +28,7 @@ return [
    'Login' => 'Iniciar sesión',
    'Register' => 'Registrar',
    'Reset Password' => 'Resetear Contraseña',
-   'Send Password Reset Link' => 'Enviar Enlace Para Resetear La Contraseña'
+   'Send Password Reset Link' => 'Enviar Enlace Para Resetear La Contraseña',
+   'review' => 'Cuéntanos más sobre tu experiencia',
+   'stars' => 'Valoración (1-5)'
 ];

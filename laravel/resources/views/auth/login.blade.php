@@ -49,7 +49,7 @@
         @csrf
           <fieldset class="forms_fieldset">
             <div class="forms_field">
-                <input id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ __('fields.Name') }}" class="forms_field-input form-control @error('name') is-invalid @enderror" required autocomplete="name" autofocus />
+                <input id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ __('fields.name') }}" class="forms_field-input form-control @error('name') is-invalid @enderror" required autocomplete="name" autofocus />
             </div>
             <div class="forms_field">
                 <input id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ __('fields.Email Address') }}" class="forms_field-input form-control @error('email') is-invalid @enderror" required autocomplete="email" />

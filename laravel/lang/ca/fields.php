@@ -27,5 +27,7 @@ return [
    'Login' => 'Inicia sessió',
    'Register' => "Registra'm",
    'Reset Password' => 'Resetejar Contassenya',
-   'Send Password Reset Link' => 'Enviar Enllaç Per Resetejar La Contrassenya'
+   'Send Password Reset Link' => 'Enviar Enllaç Per Resetejar La Contrassenya',
+   'review' => "Explica'ns més sobre la teva experiència",
+   'stars' => 'Valoració (1-5)'
 ];

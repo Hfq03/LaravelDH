@@ -6,8 +6,8 @@ use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PlacesController;
-use App\Http\Controllers\Api\Favorite;
-use App\Http\Controllers\Api\Review;
+use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +41,5 @@ Route::post('/places/{place}/favorites', [PlacesController::class,'favorite']);
 
 Route::delete('/places/{place}/favorites', [PlacesController::class,'unfavorite']);
 
-Route::apiResource('places.review', PlacesController::class);
+Route::apiResource('places.reviews', ReviewController::class);
 

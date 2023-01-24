@@ -14,17 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 255);
-            $table->string('description', 255);
-            $table->unsignedBigInteger('file_id');
-            $table->foreign('file_id')->references('id')->on('files');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')
+                  ->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('place_id');
+            $table->foreign('place_id')->references('id')->on('places')
+                  ->onUpdate('cascade')->onDelete('cascade');
+            $table->string('review', 255);
             $table->integer('stars');
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users');
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
-            //$table->timestamps();
+        });
+        // Eloquent compatibility workaround :-)
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->id()->first();
+            $table->unique(['user_id', 'place_id']);
         });
     }
 

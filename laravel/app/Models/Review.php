@@ -9,22 +9,15 @@ class Review extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
-        'title',
-        'description',
-        'file_id',
+        'user_id',
+        'place_id',
+        'review',
         'stars',
-        'visibility_id',
-        'author_id',
     ];
 
-    public function review(){
-        return $this->belongsTo(Review::class);
-    }
     public function user(){
-        return $this->belongsTo(User::class, 'author_id');
-    }
-    public function author(){
-       return $this->belongsTo(User::class);
+        return User::find($this->user_id);
     }
 }
