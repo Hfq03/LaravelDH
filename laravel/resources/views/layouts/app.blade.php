@@ -17,6 +17,11 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Scripts -->
+    @env(['local','development'])
+        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @endenv
+    @include('flash')
     <!-- Styles and scripts -->
     @env(['local','development'])
         @vite(['resources/sass/app.scss', 'resources/js/bootstrap.js'])  
@@ -28,9 +33,6 @@
         <script type="module" src="/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
         <link rel="stylesheet" href="/build/{{ $manifest['resources/sass/app.scss']['file'] }}">
     @endenv
-
-    <!-- Scripts -->
-    <!-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) -->
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/ee69a94543.js" crossorigin="anonymous"></script>
